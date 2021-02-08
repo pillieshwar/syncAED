@@ -1,0 +1,71 @@
+const eventData = [
+    {
+        windowTime:{
+            date:"12/23/2020",
+            startTime:"02.03.7",
+            endTime:"02.04.0"
+        },
+        pmu_id:"PMU_01",
+        event_type:"EVENT_1",
+        bus_id:"BUS_01",
+        confidence_level:32.37111871,
+        bad_flag_data:0,
+        severity:0.27405469
+    },
+    {
+        windowTime:{
+            date:"12/23/2020",
+            startTime:"02.03.7",
+            endTime:"02.04.0"
+        },
+        pmu_id:"PMU_01",
+        event_type:"EVENT_1",
+        bus_id:"BUS_01",
+        confidence_level:32.37111871,
+        bad_flag_data:0,
+        severity:0.27405469
+    },
+    {
+        windowTime:{
+            date:"12/23/2020",
+            startTime:"02.03.7",
+            endTime:"02.04.0"
+        },
+        pmu_id:"PMU_01",
+        event_type:"EVENT_1",
+        bus_id:"BUS_01",
+        confidence_level:32.37111871,
+        bad_flag_data:0,
+        severity:0.27405469
+    },
+    
+    {
+        windowTime:{
+            date:"12/23/2020",
+            startTime:"02.03.7",
+            endTime:"02.04.0"
+        },
+        pmu_id:"PMU_01",
+        event_type:"EVENT_1",
+        bus_id:"BUS_01",
+        confidence_level:32.37111871,
+        bad_flag_data:0,
+        severity:0.27405469
+    },
+    {
+        windowTime:{
+            date:"12/23/2020",
+            startTime:"02.03.7",
+            endTime:"02.04.0"
+        },
+        pmu_id:"PMU_01",
+        event_type:"EVENT_1",
+        bus_id:"BUS_01",
+        confidence_level:32.37111871,
+        bad_flag_data:0,
+        severity:0.27405469
+    },
+    
+]
+
+export default eventData
