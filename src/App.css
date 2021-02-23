@@ -59,8 +59,8 @@ padding:0.2rem 0.3rem;
 }
 
 body{
-  background-color: #0B132B;
-  color: white;
+  /* background-color: #0B132B; */
+  color: black;
 }
 
 .myHeader{
@@ -69,6 +69,10 @@ body{
   flex-direction: row;
   justify-content: space-between;
   background-image: linear-gradient(to right, #468189 , #3A506B);
+}
+
+.highlight-color{
+  background: linear-gradient(to left, rgb(112, 101, 214), rgb(230, 106, 213))
 }
 
 .userSettings{
