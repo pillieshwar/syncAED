@@ -11,14 +11,6 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    console.log("loaded componentDidMount");
-    // axios.get("http://127.0.0.1:9002/events")
-    // .then(res=>{
-
-    //   const syncaed = res.data;
-    //   this.setState({syncaed});
-    //   console.log("syncaed---------------===>>>"+syncaed);
-    // })
     fetch("http://127.0.0.1:9002/events")
       .then((res) => res.json())
       .then(
@@ -41,7 +33,6 @@ export class Home extends Component {
 
   render() {
     console.log("home syncaed len : " + this.state.syncaed.length);
-
     return (
       <div>
         <Main syncaed={this.state.syncaed} />
