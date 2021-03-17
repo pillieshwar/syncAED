@@ -1,49 +1,53 @@
 import React, { Component } from "react";
-import Header from "./header";
-import Navbar from "./navbar";
+import axios from "axios";
+import Main from "./main";
 
 export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      syncaed:[]
+      syncaed: [],
     };
   }
 
-
   componentDidMount() {
+    console.log("loaded componentDidMount");
+    // axios.get("http://127.0.0.1:9002/events")
+    // .then(res=>{
+
+    //   const syncaed = res.data;
+    //   this.setState({syncaed});
+    //   console.log("syncaed---------------===>>>"+syncaed);
+    // })
     fetch("http://127.0.0.1:9002/events")
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(
         (result) => {
-          
-          let syncaed = result.results
-          console.log(syncaed)
+          console.log("result ----> " + result.map_results);
+          let syncaed = result.results;
+          console.log(syncaed);
           this.setState({
-            syncaed:syncaed
+            syncaed: syncaed,
           });
         },
         (error) => {
           this.setState({
             isLoaded: true,
-            error
+            error,
           });
         }
-      )
+      );
   }
-  render() {
 
-    
+  render() {
+    console.log("home syncaed len : " + this.state.syncaed.length);
+
     return (
       <div>
-        <Header />
-        <Navbar syncaed={this.state.syncaed}/>
-        
-        {/* <Footer /> */}
+        <Main syncaed={this.state.syncaed} />
       </div>
     );
   }
 }
 
 export default Home;
-

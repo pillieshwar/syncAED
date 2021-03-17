@@ -41,9 +41,7 @@ export default function Header() {
           </Paper>
         </Grid>
         <Grid item xs={1} >
-        <Fab aria-controls="header" color="secondary" style={{marginTop:"0.4rem"}} onClick={handleClick} aria-label="add" aria-haspopup="true">
-          <SettingsIcon fontSize="medium" />
-        </Fab>
+          <SettingsIcon style={{marginTop:"1.44rem"}}  aria-controls="header" color="black" fontSize="medium" onClick={handleClick} aria-label="add" aria-haspopup="true"/>
         <Menu
         id="header"
         anchorEl={anchorEl}

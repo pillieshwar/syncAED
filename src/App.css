@@ -45,17 +45,17 @@ padding:0.2rem 0.3rem;
 
 .tableTitle{
   text-align: center;
-  font-size: medium;
+   font-size: medium;
   font-weight: 600;
-  margin-bottom:0.5rem;
+  color : navy;
+  /*margin-bottom:0.5rem; */
   margin-top:0px
 }
 
 .dataTable{
   width: 100%;
   border-collapse: collapse;
-  background-color: #257B79;
-  
+  background: linear-gradient(to left, rgb(251, 251, 251))
 }
 
 body{
