@@ -28,7 +28,7 @@ function App() {
         <Header />
         {/* <Navbar /> */}
         <Paper className={classes.root} className={classes.tabs}>
-          <Tabs indicatorColor="magenta" textColor="primary">
+          <Tabs>
             <Link to="/">
               <Tab label="SyncAED Detection"></Tab>
             </Link>
