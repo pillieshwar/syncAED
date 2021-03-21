@@ -13,7 +13,7 @@ const theme = createMuiTheme({
       main: colors.green[800],
     },
     secondary: {
-      main: colors.deepPurple[500],
+      main: colors.red[500],
     },
     error: {
       main: colors.red[500],

@@ -1,81 +1,80 @@
-.map{
-  margin:2rem 1rem;
-  height:80vh;
-  width:55rem;
-  z-index:0;
-  position:relative;
- 
+.map {
+  margin: 2rem 1rem;
+  height: 80vh;
+  width: 55rem;
+  z-index: 0;
+  position: relative;
 }
-table, td, th {
+table,
+td,
+th {
   text-align: center;
   border-bottom: 1px solid rgb(255, 255, 255);
 }
-table{
-  border-radius: 5px; 
+table {
+  border-radius: 5px;
   overflow: hidden;
-  height:10rem;
+  height: 10rem;
 }
-td{
-  padding:0.5rem;
+td {
+  padding: 0.5rem;
   font-size: 1rem;
 }
-th{
+th {
   font-size: 1rem;
   font-weight: 600;
-  padding:0.5rem;
+  padding: 0.5rem;
 }
-td:nth-child(1){
-padding:0.2rem 0.3rem;
-
+td:nth-child(1) {
+  padding: 0.2rem 0.3rem;
 }
 
-
-
-
-.firstCell{
-  width:8rem;
-  height:2.7rem;
-  border-radius: 2px;;
-  padding:0.2rem;
+.firstCell {
+  width: 8rem;
+  height: 2.7rem;
+  border-radius: 2px;
+  padding: 0.2rem;
   font-weight: 600;
   font-size: 0.7rem;
-  color:black;
-  background-image: linear-gradient(to bottom, #FFFFFF , #5D5D5D);
+  color: black;
+  background-image: linear-gradient(to bottom, #ffffff, #5d5d5d);
 }
-
-.tableTitle{
+.chart_back {
+  background-color: dimgray;
+}
+.tableTitle {
   text-align: center;
-   font-size: medium;
+  font-size: medium;
   font-weight: 600;
-  color : navy;
+  color: navy;
   /*margin-bottom:0.5rem; */
-  margin-top:0px
+  margin-top: 0px;
 }
 
-.dataTable{
+.dataTable {
   width: 100%;
   border-collapse: collapse;
-  background: linear-gradient(to left, rgb(251, 251, 251))
+  background: linear-gradient(to left, rgb(251, 251, 251));
 }
 
-body{
+body {
   /* background-color: #0B132B; */
   color: black;
 }
 
-.myHeader{
+.myHeader {
   height: 3rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-image: linear-gradient(to right, #468189 , #3A506B);
+  background-image: linear-gradient(to right, #468189, #3a506b);
 }
 
-.highlight-color{
-  background: linear-gradient(to left, rgb(112, 101, 214), rgb(230, 106, 213))
+.highlight-color {
+  background: linear-gradient(to left, rgb(112, 101, 214), rgb(230, 106, 213));
 }
 
-.userSettings{
+.userSettings {
   margin-left: 0.7rem;
   border: 1px solid #707070;
   margin-right: 4rem;
@@ -86,31 +85,29 @@ body{
   font-weight: 600;
 }
 
-.showButton{
+.showButton {
   font-size: small;
   font-weight: 600;
-  padding:0.5rem;
-  width:4.5rem;
+  padding: 0.5rem;
+  width: 4.5rem;
   border-radius: 40px;
   border: none;
-  background-image: linear-gradient(to bottom,#F4E9ED , #5D5D5D);
-
+  background-image: linear-gradient(to bottom, #f4e9ed, #5d5d5d);
 }
 
-.showButton:hover{
-  background-image: linear-gradient(to bottom,#d3cacd , #3a3a3a);
-
+.showButton:hover {
+  background-image: linear-gradient(to bottom, #d3cacd, #3a3a3a);
 }
 
-.anomalyNames{
+.anomalyNames {
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 2px;
   height: 2.2rem;
   width: 1.8rem;
-  margin:3px;
-  color:black;
+  margin: 3px;
+  color: black;
   font-size: large;
   font-weight: 600;
 }
