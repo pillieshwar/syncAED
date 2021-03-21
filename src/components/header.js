@@ -2,7 +2,6 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
-import Fab from "@material-ui/core/Fab";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";

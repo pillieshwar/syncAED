@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import Main from "./main";
 
 export class Home extends Component {

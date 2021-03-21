@@ -27,7 +27,7 @@ function App() {
       <Router>
         <Header />
         {/* <Navbar /> */}
-        <Paper className={classes.root} className={classes.tabs}>
+        <Paper className={(classes.root, classes.tabs)}>
           <Tabs>
             <Link to="/">
               <Tab label="SyncAED Detection"></Tab>
