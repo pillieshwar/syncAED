@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { IconButton } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AlarmIcon from "@material-ui/icons/Alarm";
 import Grid from "@material-ui/core/Grid";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts";
 import Paper from "@material-ui/core/Paper";
 import chart_back from "../App.css";
-let API_URL = "http://127.0.0.1:9002/result_events/0";
+import { ButtonGroup, Button, Fab, IconButton } from "@material-ui/core";
+import VisibilityIcon from "@material-ui/icons/Visibility";
+import { StayPrimaryLandscape } from "@material-ui/icons";
+import { createMuiTheme, colors } from "@material-ui/core";
 
+let API_URL = "http://127.0.0.1:9002/result_events/0";
 class AnomalyDetection extends Component {
   constructor(props) {
     super(props);
@@ -107,11 +110,18 @@ class AnomalyDetection extends Component {
       paddingTop: "14px",
     };
 
+    const fabStyle = {
+      color: colors.green[800],
+      minWidth: 16,
+      minHeight: 28,
+      height: 28,
+      width: 16,
+    };
     return (
       <div class="row">
-        <Grid style={styleObj} container spacing={1}>
+        <Grid style={styleObj} container spacing={3}>
           <Grid item xs={6}>
-            <table className="dataTable">
+            <table style={{ minWidth: 650 }} className="dataTable">
               <thead>
                 <tr>
                   <th>WINDOW TIME</th>
@@ -120,7 +130,7 @@ class AnomalyDetection extends Component {
                   <th>ANOMALIES DETECTED</th>
                   <th>CONFIDENTIAL LEVEL</th>
                   <th>DETECTOR</th>
-                  <th></th>
+                  <th>VIEW</th>
                 </tr>
               </thead>
               <tbody>
@@ -129,17 +139,70 @@ class AnomalyDetection extends Component {
                     <tr id={anomaly.id}>
                       <td>
                         <div>
-                          <p style={{ margin: "0", fontSize: "0.7rem" }}>
-                            {anomaly.event_date}
-                          </p>
-                          <p style={{ margin: "0", fontSize: "0.7rem" }}>
-                            {anomaly.event_time}
-                          </p>
+                          <p style={{ margin: "0" }}>{anomaly.event_date}</p>
+                          <p style={{ margin: "0" }}>{anomaly.event_time}</p>
                         </div>
                       </td>
                       <td>{anomaly.pmu_id}</td>
                       <td>{anomaly.bus_id}</td>
+                      {/* <td>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                          }}
+                        >
+                          <Fab style={fabStyle} size="small">
+                            Va
+                          </Fab>
+                          <Fab style={fabStyle} size="small">
+                            Vm
+                          </Fab>
+                          <Fab style={fabStyle} size="small">
+                            Ca
+                          </Fab>
+                          <Fab
+                            style={fabStyle}
+                            // style={{
+                            //   background:
+                            //     "linear-gradient(45deg, #fafafa 30%, #d32f2f 90%)",
+                            // }}
+                            size="small"
+                          >
+                            Cm
+                          </Fab>
+                          <Fab style={fabStyle} size="small">
+                            F
+                          </Fab>
+                          <Fab style={fabStyle} size="small">
+                            Ro
+                          </Fab>
+                        </div>
+                      </td> */}
                       <td>
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            fontSize: "0.2rem",
+                          }}
+                        >
+                          <ButtonGroup
+                            size="small"
+                            grouped="minWidth:28"
+                            color="primary"
+                            aria-label="outlined primary button group"
+                          >
+                            <Button color="secondary">Va</Button>
+                            <Button>Vm</Button>
+                            <Button>Ca</Button>
+                            <Button>Cm</Button>
+                            <Button>F</Button>
+                            <Button>Ro</Button>
+                          </ButtonGroup>
+                        </div>
+                      </td>
+                      {/* <td>
                         <div style={{ display: "flex", flexDirection: "row" }}>
                           <div
                             style={{
@@ -214,10 +277,19 @@ class AnomalyDetection extends Component {
                             Ro
                           </div>
                         </div>
-                      </td>
+                      </td> */}
 
                       <td>32.37111871</td>
                       <td>1</td>
+                      <td>
+                        <IconButton
+                          color="secondary"
+                          aria-label="upload picture"
+                          component="span"
+                        >
+                          <VisibilityIcon />
+                        </IconButton>
+                      </td>
                     </tr>
                   ))
                 ) : (
