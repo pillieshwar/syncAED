@@ -430,26 +430,32 @@ class AnomalyDetection extends Component {
                     <td>Loading...</td>
                   )}
                 </tbody>
+                <div
+                  style={{
+                    float: "right",
+                    display: "flex",
+                    flexDirection: "row",
+                  }}
+                >
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    onClick={this.prevPage}
+                    aria-label="Back"
+                  >
+                    <ArrowBackIosRoundedIcon />
+                  </IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    backgroundColor="primary"
+                    onClick={this.nextPage}
+                    aria-label="Next"
+                  >
+                    <ArrowForwardIosRoundedIcon />
+                  </IconButton>
+                </div>
               </table>
-              <div style={{ float: "right" }}>
-                <IconButton
-                  color="primary"
-                  variant="contained"
-                  onClick={this.prevPage}
-                  aria-label="Back"
-                >
-                  <ArrowBackIosRoundedIcon />
-                </IconButton>
-                <IconButton
-                  color="primary"
-                  variant="contained"
-                  backgroundColor="primary"
-                  onClick={this.nextPage}
-                  aria-label="Next"
-                >
-                  <ArrowForwardIosRoundedIcon />
-                </IconButton>
-              </div>
             </Paper>
           </Grid>
           <Grid style={styleObjCharts} container spacing={4} xs={6}>
