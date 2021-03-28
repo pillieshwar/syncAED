@@ -4,7 +4,15 @@ import Pagination from "@material-ui/lab/Pagination";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AlarmIcon from "@material-ui/icons/Alarm";
 import Grid from "@material-ui/core/Grid";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from "recharts";
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+} from "recharts";
 import Paper from "@material-ui/core/Paper";
 import chart_back from "../App.css";
 import { ButtonGroup, Button, Fab, IconButton } from "@material-ui/core";
@@ -22,10 +30,19 @@ class AnomalyDetection extends Component {
       posts: [],
       page: 0,
       subsetdata: [],
+      chart_data: [],
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.loadCharts = this.loadCharts.bind(this);
+  }
+
+  loadCharts(id) {
+    console.log(id);
+    let API_CHART_URL = "http://127.0.0.1:9002/result_events/chart_data/" + id;
+    const data = axios.get(API_CHART_URL);
+    data.then((res) => this.setState({ chart_data: res.data || [] }));
   }
 
   nextPage() {
@@ -107,128 +124,104 @@ class AnomalyDetection extends Component {
     ];
 
     const renderLineChart = (
-      <LineChart width={300} height={180} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis
-          dataKey="name"
-          label={{
-            value: "Time",
-            position: "bottom",
-          }}
+      <LineChart width={310} height={160} data={this.state.chart_data}>
+        <Line
+          type="monotone"
+          dataKey="vol_angle"
+          stroke="#0072B5"
+          activeDot={{ r: 5 }}
+          dot={false}
         />
-        <YAxis
-          label={{
-            value: "V",
-            angle: -90,
-            position: "left",
-          }}
-        />
+        {/* <CartesianGrid stroke="#ccc" /> */}
+        <XAxis dataKey="id" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
       </LineChart>
     );
 
     const renderLineChart2 = (
-      <LineChart width={300} height={180} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#f57c00" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis
-          dataKey="name"
-          label={{
-            value: "Time",
-            position: "bottom",
-          }}
+      <LineChart width={310} height={160} data={this.state.chart_data}>
+        <Line
+          type="monotone"
+          dataKey="vol_mag"
+          stroke="#FF0000"
+          activeDot={{ r: 5 }}
+          dot={false}
         />
-        <YAxis
-          label={{
-            value: "V",
-            angle: -90,
-            position: "left",
-          }}
-        />
+        {/* <CartesianGrid stroke="#ccc" /> */}
+        <XAxis dataKey="id" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
       </LineChart>
     );
 
     const renderLineChart3 = (
-      <LineChart width={300} height={180} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#e33371" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis
-          dataKey="name"
-          label={{
-            value: "Time",
-            position: "bottom",
-          }}
+      <LineChart width={310} height={160} data={this.state.chart_data}>
+        <Line
+          type="monotone"
+          dataKey="current_angle"
+          stroke="#1B7340"
+          activeDot={{ r: 5 }}
+          dot={false}
         />
-        <YAxis
-          label={{
-            value: "V",
-            angle: -90,
-            position: "left",
-          }}
-        />
+        {/* <CartesianGrid stroke="#ccc" /> */}
+        <XAxis dataKey="id" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
       </LineChart>
     );
 
     const renderLineChart4 = (
-      <LineChart width={300} height={180} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#388e3c" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis
-          dataKey="name"
-          label={{
-            value: "Time",
-            position: "bottom",
-          }}
+      <LineChart width={310} height={160} data={this.state.chart_data}>
+        <Line
+          type="monotone"
+          dataKey="current_mag"
+          stroke="#F19828"
+          activeDot={{ r: 5 }}
+          dot={false}
         />
-        <YAxis
-          label={{
-            value: "V",
-            angle: -90,
-            position: "left",
-          }}
-        />
+        {/* <CartesianGrid stroke="#ccc" /> */}
+        <XAxis dataKey="id" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
       </LineChart>
     );
 
     const renderLineChart5 = (
-      <LineChart width={300} height={180} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#ff9800" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis
-          dataKey="name"
-          label={{
-            value: "Time",
-            position: "bottom",
-          }}
+      <LineChart width={310} height={160} data={this.state.chart_data}>
+        <Line
+          type="monotone"
+          dataKey="frequency"
+          stroke="#D2386C"
+          activeDot={{ r: 5 }}
+          dot={false}
         />
-        <YAxis
-          label={{
-            value: "V",
-            angle: -90,
-            position: "left",
-          }}
-        />
+        {/* <CartesianGrid stroke="#ccc" /> */}
+        <XAxis dataKey="id" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
       </LineChart>
     );
 
     const renderLineChart6 = (
-      <LineChart width={300} height={180} data={data}>
-        <Line type="monotone" dataKey="uv" stroke="#dc004e" />
-        <CartesianGrid stroke="#ccc" />
-        <XAxis
-          dataKey="name"
-          label={{
-            value: "Time",
-            position: "bottom",
-          }}
+      <LineChart width={310} height={160} data={this.state.chart_data}>
+        <Line
+          type="monotone"
+          dataKey="rocof"
+          stroke="#926AA6"
+          activeDot={{ r: 5 }}
+          dot={false}
         />
-        <YAxis
-          label={{
-            value: "V",
-            angle: -90,
-            position: "left",
-          }}
-        />
+        {/* <CartesianGrid stroke="#ccc" /> */}
+        <XAxis dataKey="id" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
       </LineChart>
     );
 
@@ -240,7 +233,7 @@ class AnomalyDetection extends Component {
     };
 
     const styleObjCharts2 = {
-      marginTop: "-180px",
+      marginTop: "-50px",
     };
 
     const fabStyle = {
@@ -252,7 +245,7 @@ class AnomalyDetection extends Component {
     };
     return (
       <div class="row">
-        <Grid style={styleObj} container spacing={3}>
+        <Grid style={styleObj} container>
           <Grid item xs={6}>
             <Paper elevation={3}>
               <table style={{ minWidth: 650 }} className="dataTable">
@@ -279,40 +272,7 @@ class AnomalyDetection extends Component {
                         </td>
                         <td>{anomaly.pmu_id}</td>
                         <td>{anomaly.bus_id}</td>
-                        {/* <td>
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                          }}
-                        >
-                          <Fab style={fabStyle} size="small">
-                            Va
-                          </Fab>
-                          <Fab style={fabStyle} size="small">
-                            Vm
-                          </Fab>
-                          <Fab style={fabStyle} size="small">
-                            Ca
-                          </Fab>
-                          <Fab
-                            style={fabStyle}
-                            // style={{
-                            //   background:
-                            //     "linear-gradient(45deg, #fafafa 30%, #d32f2f 90%)",
-                            // }}
-                            size="small"
-                          >
-                            Cm
-                          </Fab>
-                          <Fab style={fabStyle} size="small">
-                            F
-                          </Fab>
-                          <Fab style={fabStyle} size="small">
-                            Ro
-                          </Fab>
-                        </div>
-                      </td> */}
+
                         <td>
                           <div
                             style={{
@@ -336,82 +296,6 @@ class AnomalyDetection extends Component {
                             </ButtonGroup>
                           </div>
                         </td>
-                        {/* <td>
-                        <div style={{ display: "flex", flexDirection: "row" }}>
-                          <div
-                            style={{
-                              backgroundImage: `${
-                                anomaly.vol_angle
-                                  ? "linear-gradient(to bottom,#61FBA9 , #228B1B)"
-                                  : "linear-gradient(to bottom,#FFFFFF , #5D5D5D)"
-                              }`,
-                            }}
-                            className="anomalyNames"
-                          >
-                            Va
-                          </div>
-                          <div
-                            style={{
-                              backgroundImage: `${
-                                anomaly.vol_mag
-                                  ? "linear-gradient(to bottom,#61FBA9 , #228B1B)"
-                                  : "linear-gradient(to bottom,#FFFFFF , #5D5D5D)"
-                              }`,
-                            }}
-                            className="anomalyNames"
-                          >
-                            Vm
-                          </div>
-                          <div
-                            style={{
-                              backgroundImage: `${
-                                anomaly.current_angle
-                                  ? "linear-gradient(to bottom,#61FBA9 , #228B1B)"
-                                  : "linear-gradient(to bottom,#FFFFFF , #5D5D5D)"
-                              }`,
-                            }}
-                            className="anomalyNames"
-                          >
-                            Ca
-                          </div>
-                          <div
-                            style={{
-                              backgroundImage: `${
-                                anomaly.current_mag
-                                  ? "linear-gradient(to bottom,#61FBA9 , #228B1B)"
-                                  : "linear-gradient(to bottom,#FFFFFF , #5D5D5D)"
-                              }`,
-                            }}
-                            className="anomalyNames"
-                          >
-                            Cm
-                          </div>
-                          <div
-                            style={{
-                              backgroundImage: `${
-                                anomaly.frequency
-                                  ? "linear-gradient(to bottom,#61FBA9 , #228B1B)"
-                                  : "linear-gradient(to bottom,#FFFFFF , #5D5D5D)"
-                              }`,
-                            }}
-                            className="anomalyNames"
-                          >
-                            F
-                          </div>
-                          <div
-                            style={{
-                              backgroundImage: `${
-                                anomaly.rocof
-                                  ? "linear-gradient(to bottom,#61FBA9 , #228B1B)"
-                                  : "linear-gradient(to bottom,#FFFFFF , #5D5D5D)"
-                              }`,
-                            }}
-                            className="anomalyNames"
-                          >
-                            Ro
-                          </div>
-                        </div>
-                      </td> */}
 
                         <td>32.37111871</td>
                         <td>1</td>
@@ -421,7 +305,10 @@ class AnomalyDetection extends Component {
                             aria-label="upload picture"
                             component="span"
                           >
-                            <VisibilityIcon />
+                            <VisibilityIcon
+                              id={anomaly.id}
+                              onClick={() => this.loadCharts(anomaly.id)}
+                            />
                           </IconButton>
                         </td>
                       </tr>
@@ -458,24 +345,29 @@ class AnomalyDetection extends Component {
               </table>
             </Paper>
           </Grid>
-          <Grid style={styleObjCharts} container spacing={4} xs={6}>
-            <Grid item xs={6}>
-              <Paper elevation={3}>{renderLineChart}</Paper>
+          <Grid style={styleObjCharts} container xs={5}>
+            <Grid item xs={5}>
+              {renderLineChart}
             </Grid>
-            <Grid item xs={6}>
-              <Paper elevation={3}>{renderLineChart2}</Paper>
+            <Grid item xs={1}></Grid>
+            <Grid item xs={5}>
+              {renderLineChart2}
             </Grid>
-            <Grid style={styleObjCharts2} item xs={6}>
-              <Paper elevation={3}>{renderLineChart3}</Paper>
+
+            <Grid style={styleObjCharts2} item xs={5}>
+              {renderLineChart3}
             </Grid>
-            <Grid style={styleObjCharts2} item xs={6}>
-              <Paper elevation={3}>{renderLineChart4}</Paper>
+            <Grid item xs={1}></Grid>
+            <Grid style={styleObjCharts2} item xs={5}>
+              {renderLineChart4}
             </Grid>
-            <Grid style={styleObjCharts2} item xs={6}>
-              <Paper elevation={3}>{renderLineChart5}</Paper>
+
+            <Grid style={styleObjCharts2} item xs={5}>
+              {renderLineChart5}
             </Grid>
-            <Grid style={styleObjCharts2} item xs={6}>
-              <Paper elevation={3}>{renderLineChart6}</Paper>
+            <Grid item xs={1}></Grid>
+            <Grid style={styleObjCharts2} item xs={5}>
+              {renderLineChart6}
             </Grid>
           </Grid>
         </Grid>
