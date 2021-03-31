@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     textAlign: "center",
+    fontStyle: "oblique",
+    fontFamily: "system-ui",
   },
 }));
 
@@ -34,16 +36,19 @@ export default function Header() {
         <Grid item xs={11}>
           <Paper elevation={0} className={classes.paper}>
             {/* <Header /> */}
-            <h2 className="highlight-color">
+            <h1
+              style={{ padding: "10px", color: "white" }}
+              className="highlight-color"
+            >
               Synchrophasor Anomaly/Event Detection and Classification
-            </h2>
+            </h1>
           </Paper>
         </Grid>
         <Grid item xs={1}>
           <SettingsIcon
-            style={{ marginTop: "1.44rem" }}
+            style={{ marginTop: "1rem" }}
             aria-controls="header"
-            color="black"
+            color="white"
             fontSize="medium"
             onClick={handleClick}
             aria-label="add"

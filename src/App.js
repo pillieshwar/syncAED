@@ -17,8 +17,8 @@ const useStyles = makeStyles({
     flexGrow: 1,
   },
   tab: {
-    color: "black",
-    backgroundColor: "magenta",
+    color: "white",
+    backgroundColor: "white",
   },
 });
 
@@ -32,16 +32,19 @@ function App() {
         <Router>
           <Header />
           {/* <Navbar /> */}
-          <Paper className={(classes.root, classes.tabs)}>
+          <Paper
+            style={{ backgroundColor: "white", color: "white" }}
+            className={(classes.root, classes.tabs)}
+          >
             <Tabs>
               <Link to="/">
-                <Tab label="SyncAED Detection"></Tab>
+                <Tab style={{ color: "black" }} label="SyncAED Detection"></Tab>
               </Link>
               <Link to="/anomaly_detection">
-                <Tab label="Anomaly Detection" />
+                <Tab style={{ color: "black" }} label="Anomaly Detection" />
               </Link>
               <Link to="/event_detection">
-                <Tab label="Event Detection" />
+                <Tab style={{ color: "black" }} label="Event Detection" />
               </Link>
             </Tabs>
           </Paper>

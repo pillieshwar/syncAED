@@ -4,6 +4,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AlarmIcon from "@material-ui/icons/Alarm";
 import Grid from "@material-ui/core/Grid";
+import Maps from "./anomalyMap";
 import {
   LineChart,
   Line,
@@ -76,53 +77,9 @@ class AnomalyDetection extends Component {
     console.log("componentDidMount");
     const data = axios.get(API_URL);
     data.then((res) => this.setState({ posts: res.data || [] }));
+    this.loadCharts(1);
   }
   render() {
-    const data = [
-      {
-        name: "Page A",
-        uv: 4,
-        pv: 2.4,
-        amt: 2.4,
-      },
-      {
-        name: "Page B",
-        uv: 3.0,
-        pv: 1.398,
-        amt: 2.21,
-      },
-      {
-        name: "Page C",
-        uv: 2.0,
-        pv: 9.8,
-        amt: 2.29,
-      },
-      {
-        name: "Page D",
-        uv: 2.78,
-        pv: 3.908,
-        amt: 2.0,
-      },
-      {
-        name: "Page E",
-        uv: 1.89,
-        pv: 4.8,
-        amt: 2.181,
-      },
-      {
-        name: "Page F",
-        uv: 2.39,
-        pv: 3.8,
-        amt: 2.5,
-      },
-      {
-        name: "Page G",
-        uv: 3.49,
-        pv: 4.3,
-        amt: 2.1,
-      },
-    ];
-
     const renderLineChart = (
       <LineChart width={310} height={160} data={this.state.chart_data}>
         <Line
@@ -247,111 +204,123 @@ class AnomalyDetection extends Component {
       <div class="row">
         <Grid style={styleObj} container>
           <Grid item xs={6}>
-            <Paper elevation={3}>
-              <table style={{ minWidth: 650 }} className="dataTable">
-                <thead>
-                  <tr>
-                    <th>WINDOW TIME</th>
-                    <th>PMU ID</th>
-                    <th>BUS ID</th>
-                    <th>ANOMALIES DETECTED</th>
-                    <th>CONFIDENTIAL LEVEL</th>
-                    <th>DETECTOR</th>
-                    <th>VIEW</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.posts.length > 0 ? (
-                    this.state.posts.map((anomaly) => (
-                      <tr id={anomaly.id}>
-                        <td>
-                          <div>
-                            <p style={{ margin: "0" }}>{anomaly.event_date}</p>
-                            <p style={{ margin: "0" }}>{anomaly.event_time}</p>
-                          </div>
-                        </td>
-                        <td>{anomaly.pmu_id}</td>
-                        <td>{anomaly.bus_id}</td>
+            <Grid item xs={12}>
+              <Paper elevation={3}>
+                <table style={{ minWidth: 650 }} className="dataTable">
+                  <thead>
+                    <tr>
+                      <th>WINDOW TIME</th>
+                      <th>PMU ID</th>
+                      <th>BUS ID</th>
+                      <th>ANOMALIES DETECTED</th>
+                      <th>CONFIDENTIAL LEVEL</th>
+                      <th>DETECTOR</th>
+                      <th>VIEW</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.posts.length > 0 ? (
+                      this.state.posts.map((anomaly) => (
+                        <tr id={anomaly.id}>
+                          <td>
+                            <div>
+                              <p style={{ margin: "0" }}>
+                                {anomaly.event_date}
+                              </p>
+                              <p style={{ margin: "0" }}>
+                                {anomaly.event_time}
+                              </p>
+                            </div>
+                          </td>
+                          <td>{anomaly.pmu_id}</td>
+                          <td>{anomaly.bus_id}</td>
 
-                        <td>
-                          <div
-                            style={{
-                              display: "flex",
-                              flexDirection: "row",
-                              fontSize: "0.2rem",
-                            }}
-                          >
-                            <ButtonGroup
-                              size="small"
-                              grouped="minWidth:28"
-                              color="primary"
-                              aria-label="outlined primary button group"
+                          <td>
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                fontSize: "0.2rem",
+                              }}
                             >
-                              <Button color="secondary">Va</Button>
-                              <Button color="secondary">Vm</Button>
-                              <Button>Ca</Button>
-                              <Button color="secondary">Cm</Button>
-                              <Button>F</Button>
-                              <Button color="secondary">Ro</Button>
-                            </ButtonGroup>
-                          </div>
-                        </td>
+                              <ButtonGroup
+                                size="small"
+                                grouped="minWidth:28"
+                                color="primary"
+                                aria-label="outlined primary button group"
+                              >
+                                <Button color="secondary">Va</Button>
+                                <Button color="secondary">Vm</Button>
+                                <Button>Ca</Button>
+                                <Button color="secondary">Cm</Button>
+                                <Button>F</Button>
+                                <Button color="secondary">Ro</Button>
+                              </ButtonGroup>
+                            </div>
+                          </td>
 
-                        <td>32.37111871</td>
-                        <td>1</td>
-                        <td>
-                          <IconButton
-                            color="secondary"
-                            aria-label="upload picture"
-                            component="span"
-                          >
-                            <VisibilityIcon
-                              id={anomaly.id}
-                              onClick={() => this.loadCharts(anomaly.id)}
-                            />
-                          </IconButton>
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    <td>Loading...</td>
-                  )}
-                </tbody>
-                <div
-                  style={{
-                    float: "right",
-                    display: "flex",
-                    flexDirection: "row",
-                  }}
-                >
-                  <IconButton
-                    color="primary"
-                    variant="contained"
-                    onClick={this.prevPage}
-                    aria-label="Back"
+                          <td>32.37111871</td>
+                          <td>1</td>
+                          <td>
+                            <IconButton
+                              color="secondary"
+                              aria-label="upload picture"
+                              component="span"
+                            >
+                              <VisibilityIcon
+                                id={anomaly.id}
+                                onClick={() => this.loadCharts(anomaly.id)}
+                              />
+                            </IconButton>
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <td>Loading...</td>
+                    )}
+                  </tbody>
+                  <div
+                    style={{
+                      float: "right",
+                      display: "flex",
+                      flexDirection: "row",
+                    }}
                   >
-                    <ArrowBackIosRoundedIcon />
-                  </IconButton>
-                  <IconButton
-                    color="primary"
-                    variant="contained"
-                    backgroundColor="primary"
-                    onClick={this.nextPage}
-                    aria-label="Next"
-                  >
-                    <ArrowForwardIosRoundedIcon />
-                  </IconButton>
-                </div>
-              </table>
-            </Paper>
+                    <IconButton
+                      color="primary"
+                      variant="contained"
+                      onClick={this.prevPage}
+                      aria-label="Back"
+                    >
+                      <ArrowBackIosRoundedIcon />
+                    </IconButton>
+                    <IconButton
+                      color="primary"
+                      variant="contained"
+                      backgroundColor="primary"
+                      onClick={this.nextPage}
+                      aria-label="Next"
+                    >
+                      <ArrowForwardIosRoundedIcon />
+                    </IconButton>
+                  </div>
+                </table>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12}>
+              <Paper elevation={3}>
+                <Maps />
+              </Paper>
+            </Grid>
           </Grid>
           <Grid style={styleObjCharts} container xs={5}>
             <Grid item xs={5}>
-              {renderLineChart}
+              {renderLineChart2}
             </Grid>
             <Grid item xs={1}></Grid>
             <Grid item xs={5}>
-              {renderLineChart2}
+              {renderLineChart}
             </Grid>
 
             <Grid style={styleObjCharts2} item xs={5}>
