@@ -22,7 +22,12 @@ import { StayPrimaryLandscape } from "@material-ui/icons";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
 import ArrowBackIosRoundedIcon from "@material-ui/icons/ArrowBackIosRounded";
 import { createMuiTheme, colors } from "@material-ui/core";
-
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import TableCell from "@material-ui/core/TableCell";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Table from "@material-ui/core/Table";
 let API_URL = "http://127.0.0.1:9002/result_events/0";
 class AnomalyDetection extends Component {
   constructor(props) {
@@ -80,6 +85,25 @@ class AnomalyDetection extends Component {
     this.loadCharts(1);
   }
   render() {
+    const StyledTableCell = withStyles((theme) => ({
+      head: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+        fontSize: 11,
+      },
+      body: {
+        fontSize: 7,
+      },
+    }))(TableCell);
+
+    const StyledTableRow = withStyles((theme) => ({
+      root: {
+        "&:nth-of-type(odd)": {
+          backgroundColor: theme.palette.action.hover,
+        },
+      },
+    }))(TableRow);
+
     const renderLineChart = (
       <LineChart width={310} height={160} data={this.state.chart_data}>
         <Line
@@ -183,7 +207,7 @@ class AnomalyDetection extends Component {
     );
 
     const styleObj = {
-      paddingTop: "10px",
+      paddingTop: "7px",
     };
     const styleObjCharts = {
       paddingTop: "14px",
@@ -203,112 +227,119 @@ class AnomalyDetection extends Component {
     return (
       <div class="row">
         <Grid style={styleObj} container>
-          <Grid item xs={6}>
+          <Grid item xs={7}>
             <Grid item xs={12}>
               <Paper elevation={3}>
-                <table style={{ minWidth: 650 }} className="dataTable">
-                  <thead>
-                    <tr>
-                      <th>WINDOW TIME</th>
-                      <th>PMU ID</th>
-                      <th>BUS ID</th>
-                      <th>ANOMALIES DETECTED</th>
-                      <th>CONFIDENTIAL LEVEL</th>
-                      <th>DETECTOR</th>
-                      <th>VIEW</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.state.posts.length > 0 ? (
-                      this.state.posts.map((anomaly) => (
-                        <tr id={anomaly.id}>
-                          <td>
-                            <div>
-                              <p style={{ margin: "0" }}>
-                                {anomaly.event_date}
-                              </p>
-                              <p style={{ margin: "0" }}>
-                                {anomaly.event_time}
-                              </p>
-                            </div>
-                          </td>
-                          <td>{anomaly.pmu_id}</td>
-                          <td>{anomaly.bus_id}</td>
+                <TableContainer>
+                  <Table aria-label="customized table">
+                    <TableHead>
+                      <TableRow>
+                        <StyledTableCell>WINDOW TIME</StyledTableCell>
+                        <StyledTableCell>PMU ID</StyledTableCell>
+                        <StyledTableCell>BUS ID</StyledTableCell>
+                        <StyledTableCell align="center">
+                          ANOMALY DETECTED
+                        </StyledTableCell>
+                        <StyledTableCell>CONFIDENTIAL LEVEL</StyledTableCell>
+                        <StyledTableCell>DETECTOR</StyledTableCell>
+                        <StyledTableCell>VIEW</StyledTableCell>
+                      </TableRow>
+                    </TableHead>
+                    <tbody>
+                      {this.state.posts.length > 0 ? (
+                        this.state.posts.map((anomaly) => (
+                          <tr id={anomaly.id}>
+                            <td>
+                              <div>
+                                <p style={{ margin: "0" }}>
+                                  {anomaly.event_date}
+                                </p>
+                                <p style={{ margin: "0" }}>
+                                  {anomaly.event_time}
+                                </p>
+                              </div>
+                            </td>
+                            <td>{anomaly.pmu_id}</td>
+                            <td>{anomaly.bus_id}</td>
 
-                          <td>
-                            <div
-                              style={{
-                                display: "flex",
-                                flexDirection: "row",
-                                fontSize: "0.2rem",
-                              }}
-                            >
-                              <ButtonGroup
-                                size="small"
-                                grouped="minWidth:28"
-                                color="primary"
-                                aria-label="outlined primary button group"
+                            <td>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  fontSize: "0.2rem",
+                                }}
                               >
-                                <Button color="secondary">Va</Button>
-                                <Button color="secondary">Vm</Button>
-                                <Button>Ca</Button>
-                                <Button color="secondary">Cm</Button>
-                                <Button>F</Button>
-                                <Button color="secondary">Ro</Button>
-                              </ButtonGroup>
-                            </div>
-                          </td>
+                                <ButtonGroup
+                                  size="small"
+                                  grouped="minWidth:28"
+                                  color="primary"
+                                  aria-label="outlined primary button group"
+                                >
+                                  <Button color="secondary">Va</Button>
+                                  <Button color="secondary">Vm</Button>
+                                  <Button>Ca</Button>
+                                  <Button color="secondary">Cm</Button>
+                                  <Button>F</Button>
+                                  <Button color="secondary">Ro</Button>
+                                </ButtonGroup>
+                              </div>
+                            </td>
 
-                          <td>32.37111871</td>
-                          <td>1</td>
-                          <td>
-                            <IconButton
-                              color="secondary"
-                              aria-label="upload picture"
-                              component="span"
-                            >
-                              <VisibilityIcon
-                                id={anomaly.id}
-                                onClick={() => this.loadCharts(anomaly.id)}
-                              />
-                            </IconButton>
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <td>Loading...</td>
-                    )}
-                  </tbody>
-                  <div
-                    style={{
-                      float: "right",
-                      display: "flex",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <IconButton
-                      color="primary"
-                      variant="contained"
-                      onClick={this.prevPage}
-                      aria-label="Back"
+                            <td>32.37111871</td>
+                            <td>1</td>
+                            <td>
+                              <IconButton
+                                color="secondary"
+                                aria-label="upload picture"
+                                component="span"
+                                style={{ padding: "5px" }}
+                              >
+                                <VisibilityIcon
+                                  id={anomaly.id}
+                                  onClick={() => this.loadCharts(anomaly.id)}
+                                />
+                              </IconButton>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <td>Loading...</td>
+                      )}
+                    </tbody>
+                    <div
+                      style={{
+                        float: "right",
+                        display: "flex",
+                        flexDirection: "row",
+                      }}
                     >
-                      <ArrowBackIosRoundedIcon />
-                    </IconButton>
-                    <IconButton
-                      color="primary"
-                      variant="contained"
-                      backgroundColor="primary"
-                      onClick={this.nextPage}
-                      aria-label="Next"
-                    >
-                      <ArrowForwardIosRoundedIcon />
-                    </IconButton>
-                  </div>
-                </table>
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={this.prevPage}
+                        aria-label="Back"
+                        style={{ padding: "5px" }}
+                      >
+                        <ArrowBackIosRoundedIcon />
+                      </IconButton>
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        backgroundColor="primary"
+                        onClick={this.nextPage}
+                        aria-label="Next"
+                        style={{ padding: "5px" }}
+                      >
+                        <ArrowForwardIosRoundedIcon />
+                      </IconButton>
+                    </div>
+                  </Table>
+                </TableContainer>
               </Paper>
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid style={{ marginTop: "20px" }} item xs={12}>
               <Paper elevation={3}>
                 <Maps />
               </Paper>

@@ -115,10 +115,11 @@ class Maps extends Component {
       <MapContainer
         className="map"
         style={{
-          marginTop: "-0.4rem",
-          borderRadius: "0.9rem",
+          marginTop: "-0.2rem",
+          marginLeft: "1px",
           border: "solid",
-          width: "44rem",
+          width: "47rem",
+          height: "38rem",
         }}
         center={center}
         zoom={6}
