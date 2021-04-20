@@ -133,7 +133,7 @@ class Maps extends Component {
           marginTop: "-0.2rem",
           marginLeft: "1px",
           border: "solid",
-          width: "47rem",
+          width: "43rem",
           height: "38rem",
         }}
         center={center}

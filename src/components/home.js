@@ -87,7 +87,7 @@ class Home extends Component {
   }
   render() {
     const styleObj = {
-      paddingTop: "7px",
+      marginBottom: "-15px",
     };
 
     const StyledTableCell = withStyles((theme) => ({
@@ -115,9 +115,9 @@ class Home extends Component {
           <Grid item xs={6}>
             <Maps />
           </Grid>
-          <Grid item xs={6}>
+          <Grid style={{ marginLeft: "-12px" }} item xs={6}>
             <Grid item xs={12}>
-              <Paper elevation={2}>
+              <Paper style={{ width: "105%" }} elevation={2}>
                 <TableContainer>
                   <Table aria-label="customized table">
                     <TableHead>
@@ -226,7 +226,7 @@ class Home extends Component {
                 </TableContainer>
               </Paper>
             </Grid>
-            <Grid style={{ marginTop: "20px" }} item xs={12}>
+            <Grid style={{ marginTop: "8px" }} item xs={12}>
               <Paper elevation={3}>
                 {/* <table style={{ minWidth: 650 }} className="dataTable">
                   <thead>

@@ -4408,7 +4408,7 @@ export default function AnomalyMap() {
       style={{
         marginTop: "-0.4rem",
         border: "solid",
-        width: "55rem",
+        width: "54rem",
         height: "14rem",
       }}
       center={center}
