@@ -73,10 +73,9 @@ class Maps extends Component {
             return mdata.bus_status > 0 ? (
               <CircleMarker
                 center={[mdata.latitude, mdata.longitude]}
-                pathOptions={greenOptions}
                 fillOpacity={0.6}
                 radius={16}
-                className="blinking"
+                className="blinking-circle"
                 // stroke={false}
               >
                 <Popup>

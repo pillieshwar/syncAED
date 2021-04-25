@@ -113,7 +113,20 @@ body {
   font-weight: 600;
 }
 
-.blinking {
-  animation: fade 1s infinite alternate;
-  color: black;
+@keyframes fade {
+  from {
+    opacity: 0.5;
+  }
 }
+
+.blinking-circle {
+  fill: green;
+  stroke: black;
+  stroke-width: 3px;
+  transition: stroke-width 0.5s;
+  animation: fade 0.5s infinite alternate;
+}
+
+/* .blinking-circle:hover {
+  stroke-width: 15px;
+} */
