@@ -56,7 +56,7 @@ class AnomalyMap extends Component {
         />
         {this.state.map_data.length > 0 ? (
           this.state.map_data.map((mdata) => {
-            return mdata.bus_name == "BUSID_02" ? (
+            return mdata.bus_id === "BUSID_03" ? (
               <CircleMarker
                 center={[mdata.latitude, mdata.longitude]}
                 // pathOptions={greenOptions}
