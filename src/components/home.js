@@ -164,12 +164,13 @@ class Home extends Component {
                                   color="primary"
                                   aria-label="outlined primary button group"
                                 >
-                                  <Button color="secondary">Va</Button>
-                                  <Button color="secondary">Vm</Button>
+                                  <Button>Va</Button>
+                                  <Button>Vm</Button>
                                   <Button>Ca</Button>
-                                  <Button color="secondary">Cm</Button>
+                                  <Button >Cm</Button>
                                   <Button>F</Button>
-                                  <Button color="secondary">Ro</Button>
+                                  <Button >Ro</Button>
+                                  {/* color="secondary" */}
                                 </ButtonGroup>
                               </div>
                             </td>

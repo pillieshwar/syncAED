@@ -32,7 +32,7 @@ class Maps extends Component {
     const center = [47.1, -119.6920787];
     const blueOptions = { color: "blue" };
     const greenOptions = {
-      animation: "fade 1s infinite alternate",
+      // animation: "fade 1s infinite alternate",
       color: "green",
     };
 

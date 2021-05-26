@@ -1,6 +1,7 @@
 import "./App.css";
 import Home from "./components/home";
 import Header from "./components/header";
+import { withStyles } from "@material-ui/core/styles";
 import AnomalyDetection from "./components/anomalyDetection";
 import EventDetection from "./components/eventDetection";
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,6 +19,25 @@ import PropTypes from "prop-types";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { useTheme } from "@material-ui/core/styles";
+import { green } from "@material-ui/core/colors";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@material-ui/icons/CheckBox";
+import Favorite from "@material-ui/icons/Favorite";
+import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 const useStyles = makeStyles({
   root: {
@@ -26,6 +46,11 @@ const useStyles = makeStyles({
   tab: {
     color: "white",
     backgroundColor: "white",
+  },
+  margin: {
+    margin: theme.spacing(1),
+    align: "right",
+    flexGrow: 1,
   },
 });
 
@@ -63,6 +88,16 @@ function a11yProps(index) {
   };
 }
 
+const GreenCheckbox = withStyles({
+  root: {
+    color: green[400],
+    "&$checked": {
+      color: green[600],
+    },
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+
 function App() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -71,11 +106,58 @@ function App() {
     setValue(newValue);
   };
 
+  const [state, setState] = React.useState({
+    checkedA: true,
+    checkedB: true,
+    checkedF: true,
+    checkedG: true,
+  });
+
+  const handleCheckChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+  // Start dialog box
+  const [open, setOpen] = React.useState(false);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    handleSnackClick();
+  };
+  // End dialog box
+
+  //Start Snackbar
+
+  const [sopen, ssetOpen] = React.useState(false);
+
+  const handleSnackClick = () => {
+    ssetOpen(true);
+  };
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    ssetOpen(false);
+  };
+
+  //End SnackBar
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <div className="App">
-        <Grid container className="highlight-color">
+        <Grid
+          container
+          justify="space-between"
+          spacing={24}
+          className="highlight-color"
+        >
           <Paper elevation={0} className={classes.paper}>
             {/* <Header /> */}
             <h1
@@ -97,26 +179,196 @@ function App() {
               SyncAEDC
             </h1>
           </Paper>
+          <Grid style={{ marginRight: "auto" }}>
+            {/* <Navbar /> */}
+            <Tabs value={value} onChange={handleChange}>
+              <Tab
+                indicatorColor="primary"
+                style={{ color: "black" }}
+                label="SyncAED Detection"
+                {...a11yProps(0)}
+              />
+              <Tab
+                style={{ color: "black" }}
+                label="Anomaly Detection"
+                {...a11yProps(1)}
+              />
+              <Tab
+                style={{ color: "black" }}
+                label="Event Detection"
+                {...a11yProps(2)}
+              />
+            </Tabs>
+          </Grid>
+          <Grid>
+            <div className={classes.margin}>
+              <Button
+                size="small"
+                variant="outlined"
+                color="secondary"
+                onClick={handleClickOpen}
+              >
+                User Settings
+              </Button>
 
-          {/* <Navbar /> */}
-          <Tabs value={value} onChange={handleChange}>
-            <Tab
-              indicatorColor="primary"
-              style={{ color: "black" }}
-              label="SyncAED Detection"
-              {...a11yProps(0)}
-            />
-            <Tab
-              style={{ color: "black" }}
-              label="Anomaly Detection"
-              {...a11yProps(1)}
-            />
-            <Tab
-              style={{ color: "black" }}
-              label="Event Detection"
-              {...a11yProps(2)}
-            />
-          </Tabs>
+              <div>
+                <Dialog
+                  fullScreen={fullScreen}
+                  open={open}
+                  onClose={handleClose}
+                  aria-labelledby="responsive-dialog-title"
+                >
+                  <DialogTitle id="responsive-dialog-title">
+                    {"USER SETTINGS"}
+                  </DialogTitle>
+                  <DialogContent>
+                    <DialogContentText>
+                      Modify the user settings by selecting the appropriate
+                      options to reflect the same in UI.
+                    </DialogContentText>
+                    <Grid container>
+                      <FormGroup row>
+                        <Grid item xs={4}>
+                          <h3 style={{ marginTop: "2.5%" }}>Task : </h3>
+                        </Grid>
+                        <Grid item xs={4}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={state.checkedA}
+                                onChange={handleCheckChange}
+                                name="checkedA"
+                              />
+                            }
+                            label="Anomoly Detection"
+                          />
+                        </Grid>
+                        <Grid item xs={4}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={state.checkedB}
+                                onChange={handleCheckChange}
+                                name="checkedB"
+                                color="primary"
+                              />
+                            }
+                            label="Event Detection"
+                          />
+                        </Grid>
+                      </FormGroup>
+                    </Grid>
+
+                    <Grid container>
+                      <FormGroup row>
+                        <Grid item xs={4}>
+                          <h3 style={{ marginTop: "3%" }}>Base Detector : </h3>
+                        </Grid>
+                        <Grid item xs={4}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                icon={
+                                  <CheckBoxOutlineBlankIcon fontSize="small" />
+                                }
+                                checkedIcon={<CheckBoxIcon fontSize="small" />}
+                                name="checkedI"
+                              />
+                            }
+                            label="DBScan"
+                          />
+                        </Grid>
+                        <Grid item xs={4}>
+                          <FormControlLabel
+                            control={
+                              <GreenCheckbox
+                                checked={state.checkedG}
+                                onChange={handleCheckChange}
+                                name="checkedG"
+                              />
+                            }
+                            label="Linear Regression"
+                          />
+                        </Grid>
+                      </FormGroup>
+                    </Grid>
+                    <Grid container>
+                      <FormGroup row>
+                        <Grid item xs={3}>
+                          <h3 style={{ marginTop: "3%" }}>
+                            PMU Data Anomoly Option
+                          </h3>
+                        </Grid>
+                        <Grid item xs={4}>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                icon={
+                                  <CheckBoxOutlineBlankIcon fontSize="small" />
+                                }
+                                checkedIcon={<CheckBoxIcon fontSize="small" />}
+                                name="checkedI"
+                              />
+                            }
+                            label="Detect & Flag"
+                          />
+                        </Grid>
+                        <Grid item xs={3}>
+                          <FormControlLabel
+                            control={
+                              <GreenCheckbox
+                                checked={state.checkedG}
+                                onChange={handleCheckChange}
+                                name="checkedG"
+                              />
+                            }
+                            label="Mitigate & Replace"
+                          />
+                        </Grid>
+                      </FormGroup>
+                    </Grid>
+                  </DialogContent>
+                  <DialogActions>
+                    <Button autoFocus onClick={handleClose} color="primary">
+                      Cancel
+                    </Button>
+                    <Button onClick={handleClose} color="primary" autoFocus>
+                      Save
+                    </Button>
+                    <Snackbar
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "left",
+                      }}
+                      sopen={sopen}
+                      autoHideDuration={6000}
+                      onClose={handleSnackClose}
+                      message="Note archived"
+                      action={
+                        <React.Fragment>
+                          <Button
+                            color="secondary"
+                            size="small"
+                            onClick={handleSnackClose}
+                          >
+                            UNDO
+                          </Button>
+                          <IconButton
+                            size="small"
+                            aria-label="close"
+                            color="inherit"
+                            onClick={handleSnackClose}
+                          >
+                            <CloseIcon fontSize="small" />
+                          </IconButton>
+                        </React.Fragment>
+                      }
+                    />
+                  </DialogActions>
+                </Dialog>
+              </div>
+            </div>
+          </Grid>
           <TabPanel
             style={{ marginTop: "-12px", paddingBottom: 0 }}
             value={value}

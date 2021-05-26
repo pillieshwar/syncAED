@@ -56,13 +56,13 @@ class AnomalyMap extends Component {
         />
         {this.state.map_data.length > 0 ? (
           this.state.map_data.map((mdata) => {
-            return mdata.bus_status > 0 ? (
+            return mdata.bus_name == "BUSID_02" ? (
               <CircleMarker
                 center={[mdata.latitude, mdata.longitude]}
                 // pathOptions={greenOptions}
                 fillOpacity={0.6}
                 radius={16}
-                className="blinking-circle"
+                className="blinking-circle-red"
                 // stroke={false}
               >
                 <Popup>
