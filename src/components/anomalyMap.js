@@ -43,7 +43,7 @@ class AnomalyMap extends Component {
         style={{
           marginTop: "-0.4rem",
           border: "solid",
-          width: "54rem",
+          width: "51rem",
           height: "14rem",
         }}
         center={center}

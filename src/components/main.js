@@ -36,7 +36,7 @@ export default function Main(props) {
               <table className="dataTable">
                 <thead>
                   <tr>
-                    <th>WINDOW TIME</th>
+                    <th>DATE/TIME</th>
                     <th>PMU ID</th>
                     <th>BUS ID</th>
                     <th>ANOMALIES DETECTED</th>
@@ -160,11 +160,11 @@ export default function Main(props) {
 
             <p className="tableTitle">Event Detection Table</p>
 
-            <div style={{ height: "22rem", overflowY: "auto" }}>
+            <div style={{ marginLeft: "5rem",height: "22rem", overflowY: "auto" }}>
               <table className="dataTable">
                 <thead>
                   <tr>
-                    <th>WINDOW TIME</th>
+                    <th>DATE/TIME</th>
                     <th>PMU ID</th>
                     <th>EVENT TYPE</th>
                     <th>BUS ID</th>

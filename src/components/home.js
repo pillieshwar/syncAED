@@ -116,7 +116,7 @@ class Home extends Component {
             <Maps />
           </Grid>
           <Grid style={{ marginLeft: "-12px" }} item xs={6}>
-            <Grid item xs={12}>
+            <Grid style={{ marginLeft: "10px" }} item xs={12}>
               <Paper style={{ width: "105%" }} elevation={2}>
                 <TableContainer>
                   <Table aria-label="customized table">
@@ -227,7 +227,7 @@ class Home extends Component {
                 </TableContainer>
               </Paper>
             </Grid>
-            <Grid style={{ marginTop: "8px" }} item xs={12}>
+            <Grid style={{ marginLeft: "10px", marginTop: "8px" }} item xs={12}>
               <Paper elevation={3}>
                 {/* <table style={{ minWidth: 650 }} className="dataTable">
                   <thead>

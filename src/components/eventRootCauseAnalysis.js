@@ -4,7 +4,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AlarmIcon from "@material-ui/icons/Alarm";
 import Grid from "@material-ui/core/Grid";
-import Maps from "./anomalyMap";
+import Maps from "./mapsLocalization";
 import {
   LineChart,
   Line,
@@ -28,8 +28,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
-let API_URL = "http://127.0.0.1:9002/result_events/0";
-class AnomalyDetection extends Component {
+let API_URL = "http://127.0.0.1:9002/result_events_localization/0";
+class EventClassification extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -210,11 +210,11 @@ class AnomalyDetection extends Component {
       paddingTop: "7px",
     };
     const styleObjCharts = {
-      paddingTop: "14px",
+      // paddingTop: "14px",
     };
 
     const styleObjCharts2 = {
-      marginTop: "-50px",
+      // marginTop: "-1px",
     };
 
     const fabStyle = {
@@ -224,14 +224,7 @@ class AnomalyDetection extends Component {
       height: 28,
       width: 16,
     };
-    var btn_color_va = "primary"
-    var btn_color_ca = "primary"
-    var btn_color_vm = "primary"
-    var btn_color_cm = "primary"
-    var btn_color_f = "primary"
-    var btn_color_rocof = "primary"
     return (
-      
       <div class="row">
         <Grid style={styleObj} container>
           <Grid item xs={7}>
@@ -283,118 +276,12 @@ class AnomalyDetection extends Component {
                                   color="primary"
                                   aria-label="outlined primary button group"
                                 >
-                                  {(() => {
-                                    const tt = anomaly.event_time
-                                    if(tt.substring(0, 5) === '00:47'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '17:35' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '16:48' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '18:23' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '15:11' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '01:35' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '02:24' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '15:59' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '19:12' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '19:59' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '20:47' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '21:36' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '22:23:' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '23:11' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '00:00' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '03:59' && anomaly.pmu_id==='PMU_01'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else {
-                                    btn_color_va = "primary"
-                                    btn_color_ca = "primary"
-                                    btn_color_rocof = "primary"
-                                    btn_color_vm = "primary"
-                                    btn_color_cm = "primary"
-                                    btn_color_f = "primary"
-                                    }
-                                  })()}
-
-                                  <Button color={btn_color_va}>Va</Button>
-                                  <Button color={btn_color_vm}>Vm</Button>
-                                  <Button color={btn_color_ca}>Ca</Button>
-                                  <Button color={btn_color_cm}>Cm</Button>
-                                  <Button color={btn_color_f}>F</Button>
-                                  <Button color={btn_color_rocof}>Ro</Button>
+                                  <Button>Va</Button>
+                                  <Button>Vm</Button>
+                                  <Button>Ca</Button>
+                                  <Button>Cm</Button>
+                                  <Button>F</Button>
+                                  <Button>Ro</Button>
                                   {/* color="secondary" */}
                                 </ButtonGroup>
                               </div>
@@ -453,36 +340,37 @@ class AnomalyDetection extends Component {
               </Paper>
             </Grid>
 
-            <Grid style={{ marginTop: "20px" }} item xs={12}>
-              <Paper elevation={3}>
-                <Maps />
-              </Paper>
-            </Grid>
+            
           </Grid>
           <Grid style={styleObjCharts} container xs={5}>
-            <Grid item xs={5}>
+          <Grid style={{ marginTop: "20px" }} item xs={12}>
+              {/* <Paper elevation={3}> */}
+                <Maps />
+              {/* </Paper> */}
+            </Grid>
+            {/* <Grid style={{ marginTop: "50px", marginLeft: "-25px" }} item xs={5}>
               {renderLineChart2}
             </Grid>
-            <Grid item xs={1}></Grid>
-            <Grid item xs={5}>
+            <Grid item xs={2}></Grid>
+            <Grid style={{ marginTop: "50px", marginLeft: "-22px" }} item xs={5}>
               {renderLineChart}
-            </Grid>
+            </Grid> */}
 
-            <Grid style={styleObjCharts2} item xs={5}>
+            {/* <Grid style={styleObjCharts2} item xs={5}>
               {renderLineChart3}
             </Grid>
             <Grid item xs={1}></Grid>
             <Grid style={styleObjCharts2} item xs={5}>
               {renderLineChart4}
-            </Grid>
+            </Grid> */}
 
-            <Grid style={styleObjCharts2} item xs={5}>
+            {/* <Grid style={styleObjCharts2} item xs={5}>
               {renderLineChart5}
             </Grid>
             <Grid item xs={1}></Grid>
             <Grid style={styleObjCharts2} item xs={5}>
               {renderLineChart6}
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </div>
@@ -490,4 +378,4 @@ class AnomalyDetection extends Component {
   }
 }
 
-export default AnomalyDetection;
+export default EventClassification;

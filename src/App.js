@@ -4,6 +4,8 @@ import Header from "./components/header";
 import { withStyles } from "@material-ui/core/styles";
 import AnomalyDetection from "./components/anomalyDetection";
 import EventDetection from "./components/eventDetection";
+import EventClassification from "./components/eventClassification";
+import EventRootCauseAnalysis from "./components/eventRootCauseAnalysis";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
@@ -195,9 +197,19 @@ function App() {
               />
               <Tab
                 style={{ color: "black" }}
-                label="Event Detection"
+                label="Event Detection & PMU Localization"
                 {...a11yProps(2)}
               />
+              <Tab
+                style={{ color: "black" }}
+                label="Event Classification"
+                {...a11yProps(3)}
+              />
+              {/* <Tab
+                style={{ color: "black" }}
+                label="Event Root Cause Analysis"
+                {...a11yProps(4)}
+              /> */}
             </Tabs>
           </Grid>
           <Grid>
@@ -234,7 +246,7 @@ function App() {
                         <Grid item xs={4}>
                           <FormControlLabel
                             control={
-                              <Checkbox
+                              <GreenCheckbox
                                 checked={state.checkedA}
                                 onChange={handleCheckChange}
                                 name="checkedA"
@@ -246,7 +258,7 @@ function App() {
                         <Grid item xs={4}>
                           <FormControlLabel
                             control={
-                              <Checkbox
+                              <GreenCheckbox
                                 checked={state.checkedB}
                                 onChange={handleCheckChange}
                                 name="checkedB"
@@ -390,6 +402,20 @@ function App() {
           >
             <EventDetection />
           </TabPanel>
+          <TabPanel
+            style={{ marginTop: "-12px", paddingBottom: 0 }}
+            value={value}
+            index={3}
+          >
+            <EventClassification />
+          </TabPanel>
+          {/* <TabPanel
+            style={{ marginTop: "-12px", paddingBottom: 0 }}
+            value={value}
+            index={4}
+          >
+            <EventRootCauseAnalysis />
+          </TabPanel> */}
         </Grid>
       </div>
     </ThemeProvider>
