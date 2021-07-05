@@ -28,7 +28,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
-let API_URL = "http://127.0.0.1:9002/result_events_localization/0";
+let API_URL = "http://127.0.0.1:9002/result_pmu_localization/0";
 class EventDetection extends Component {
   constructor(props) {
     super(props);
@@ -53,7 +53,7 @@ class EventDetection extends Component {
 
   nextPage() {
     console.log("next " + this.state.page);
-    API_URL = "http://127.0.0.1:9002/result_events/" + (this.state.page + 1);
+    API_URL = "http://127.0.0.1:9002/pmu_localization/" + (this.state.page + 1);
     this.setState({ page: this.state.page + 1 });
     this.getData();
   }
@@ -70,7 +70,7 @@ class EventDetection extends Component {
   prevPage() {
     console.log("prev " + this.state.page);
     if (this.state.page >= 0) {
-      API_URL = "http://127.0.0.1:9002/result_events/" + (this.state.page - 1);
+      API_URL = "http://127.0.0.1:9002/pmu_localization/" + (this.state.page - 1);
     }
     if (this.state.page > 0) {
       this.setState({ page: this.state.page - 1 });
@@ -260,28 +260,28 @@ class EventDetection extends Component {
                     </TableHead>
                     <tbody>
                       {this.state.posts.length > 0 ? (
-                        this.state.posts.map((anomaly) => (
-                          <tr id={anomaly.id}>
+                        this.state.posts.map((pmu_loc) => (
+                          <tr id={pmu_loc.id}>
                             <td>
                               <div>
                                 <p style={{ margin: "0" }}>
-                                  {anomaly.event_date}
+                                  {pmu_loc.event_date}
                                 </p>
                                 <p style={{ margin: "0" }}>
-                                  {anomaly.event_time}
+                                  {pmu_loc.event_time}
                                 </p>
                               </div>
                             </td>
-                            <td>{anomaly.pmu_id}</td>
+                            <td>{pmu_loc.detected_location}</td>
                             <td>
-                              <td align="center">{anomaly.bus_id}</td>
-                              <td align="center">{anomaly.bus_id}</td>
-                              <td align="center">{anomaly.bus_id}</td>
+                              <td align="center">{pmu_loc.pmu1_id}</td>
+                              <td align="center">{pmu_loc.pmu1_bus_id}</td>
+                              <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td>
                             </td>
                             <td>
-                              <td align="center">{anomaly.bus_id}</td>
-                              <td align="center">{anomaly.bus_id}</td>
-                              <td align="center">{anomaly.bus_id}</td>
+                              <td align="center">{pmu_loc.pmu2_id}</td>
+                              <td align="center">{pmu_loc.pmu2_bus_id}</td>
+                              <td style={{ paddingLeft: "3rem" }} align="right "><b>{pmu_loc.pmu2_norm_score}</b></td>
                             </td>
 
                             {/*<td>
