@@ -205,11 +205,11 @@ function App() {
                 label="Event Classification"
                 {...a11yProps(3)}
               />
-              {/* <Tab
+              <Tab
                 style={{ color: "black" }}
                 label="Event Root Cause Analysis"
                 {...a11yProps(4)}
-              /> */}
+              />
             </Tabs>
           </Grid>
           <Grid>
@@ -415,13 +415,13 @@ function App() {
           >
             <EventClassification />
           </TabPanel>
-          {/* <TabPanel
+          <TabPanel
             style={{ marginTop: "-12px", paddingBottom: 0 }}
             value={value}
             index={4}
           >
             <EventRootCauseAnalysis />
-          </TabPanel> */}
+          </TabPanel>
         </Grid>
       </div>
     </ThemeProvider>
