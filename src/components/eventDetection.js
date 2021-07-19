@@ -235,17 +235,16 @@ class EventDetection extends Component {
                     <TableHead>
                       <TableRow>
                         <StyledTableCell align="center">DATE/TIME</StyledTableCell>
-                        <StyledTableCell align="center">DETECTED LOCATION</StyledTableCell>
                         <StyledTableCell align="center"> PMU1
                           <TableRow>
-                            <StyledTableCell align="center">ID</StyledTableCell>
+                            <StyledTableCell align="center">PMU ID</StyledTableCell>
                             <StyledTableCell align="center">BUS ID</StyledTableCell>
                             <StyledTableCell align="center">NORMALIZED SCORE</StyledTableCell>
                           </TableRow>
                         </StyledTableCell>
                         <StyledTableCell align="center"> PMU2
                           <TableRow>
-                            <StyledTableCell align="center">ID</StyledTableCell>
+                            <StyledTableCell align="center">PMU ID</StyledTableCell>
                             <StyledTableCell align="center">BUS ID</StyledTableCell>
                             <StyledTableCell align="center">NORMALIZED SCORE</StyledTableCell>
                           </TableRow>
@@ -272,7 +271,6 @@ class EventDetection extends Component {
                                 </p>
                               </div>
                             </td>
-                            <td>{pmu_loc.detected_location}</td>
                             <td>
                               <td align="center">{pmu_loc.pmu1_id}</td>
                               <td align="center">{pmu_loc.pmu1_bus_id}</td>

@@ -37,13 +37,20 @@ class EventClassification extends Component {
       page: 0,
       subsetdata: [],
       chart_data: [],
+      map_busid: "",
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.loadCharts = this.loadCharts.bind(this);
+    this.mapNodeHighlight = this.mapNodeHighlight.bind(this);
   }
 
+  mapNodeHighlight(busid){
+    console.log("mapbusid : ", this.state.map_busid)
+    this.setState({ map_busid: busid || "BUSID_03"});
+  };
+  
   loadCharts(id) {
     console.log(id);
     let API_CHART_URL = "http://127.0.0.1:9002/result_events/chart_data/" + id;
@@ -224,6 +231,9 @@ class EventClassification extends Component {
       height: 28,
       width: 16,
     };
+
+
+
     return (
       <div class="row">
         <Grid  container>
@@ -234,16 +244,11 @@ class EventClassification extends Component {
                   <Table aria-label="customized table">
                     <TableHead>
                       <TableRow>
-                        <StyledTableCell>TIME</StyledTableCell>
+                        <StyledTableCell>DATE/TIME</StyledTableCell>
                         <StyledTableCell>PMU ID</StyledTableCell>
-                        <StyledTableCell align="center"> PMU1
-                          <TableRow>
-                            <StyledTableCell align="center">ID</StyledTableCell>
-                            <StyledTableCell align="center">BUS ID</StyledTableCell>
-                            <StyledTableCell align="center">NORMALIZED SCORE</StyledTableCell>
-                          </TableRow>
-                        </StyledTableCell>
+                        <StyledTableCell align="center">BUS ID</StyledTableCell>
                         <StyledTableCell>EVENT TYPE</StyledTableCell>
+                        <StyledTableCell>VIEW</StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <tbody>
@@ -262,12 +267,24 @@ class EventClassification extends Component {
                             </td>
                             <td>{pmu_loc.pmu1_id}</td>
                             <td>
-                              <td align="center">{pmu_loc.pmu1_id}</td>
+                              {/* <td align="center">{pmu_loc.pmu1_id}</td> */}
                               <td align="center">{pmu_loc.pmu1_bus_id}</td>
-                              <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td>
+                              {/* <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td> */}
                             </td>
                             <td>{pmu_loc.event_type}</td>
-
+                            <td>
+                              <IconButton
+                                color="secondary"
+                                aria-label="upload picture"
+                                component="span"
+                                style={{ padding: "5px" }}
+                              >
+                                <VisibilityIcon
+                                  id={pmu_loc.pmu1_bus_id}
+                                  onClick={() => this.mapNodeHighlight(pmu_loc.pmu1_bus_id)}
+                                />
+                              </IconButton>
+                            </td>
                              {/*<td>
                               <div
                                 style={{
@@ -350,7 +367,7 @@ class EventClassification extends Component {
           <Grid style={styleObjCharts} container xs={5}>
           <Grid style={{ marginTop: "20px" }} item xs={12}>
               {/* <Paper elevation={3}> */}
-                <Maps />
+                <Maps mapnodebusid={this.state.map_busid}/>
               {/* </Paper> */}
             </Grid>
             {/* <Grid style={{ marginTop: "50px", marginLeft: "-25px" }} item xs={5}>

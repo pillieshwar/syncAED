@@ -187,7 +187,7 @@ function App() {
               <Tab
                 indicatorColor="primary"
                 style={{ color: "black" }}
-                label="SyncAED Detection"
+                label="Overview"
                 {...a11yProps(0)}
               />
               <Tab

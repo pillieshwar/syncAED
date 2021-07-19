@@ -54,6 +54,22 @@ class AnomalyMap extends Component {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        {this.state.map_edges.length > 0 ? (
+                  this.state.map_edges.map((medge) => (
+                    <Polyline
+                      pathOptions={blueOptions}
+                      positions={[
+                        [medge.from_latitude, medge.from_longitude],
+                        [medge.to_latitude, medge.to_longitude],
+                      ]}
+                    />
+                  ))
+                ) : (
+                  <td>Loading...</td>
+                )}
+
+
         {this.state.map_data.length > 0 ? (
           this.state.map_data.map((mdata) => {
             return mdata.bus_id === "BUSID_03" ? (
