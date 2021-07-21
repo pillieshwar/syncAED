@@ -28,6 +28,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
+import Badge from '@material-ui/core/Badge';
 let API_URL = "http://127.0.0.1:9002/result_pmu_localization/0";
 class EventDetection extends Component {
   constructor(props) {
@@ -37,12 +38,21 @@ class EventDetection extends Component {
       page: 0,
       subsetdata: [],
       chart_data: [],
+      map_busid1: "",
+      map_busid2: "",
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.loadCharts = this.loadCharts.bind(this);
+    this.mapNodeHighlight = this.mapNodeHighlight.bind(this);
   }
+
+  mapNodeHighlight(busid1, busid2){
+    console.log("mapbusid : ", this.state.map_busid1)
+    this.setState({ map_busid1: busid1 || "BUSID_03"});
+    this.setState({ map_busid2: busid2 || "BUSID_02"});
+  };
 
   loadCharts(id) {
     console.log(id);
@@ -249,6 +259,7 @@ class EventDetection extends Component {
                             <StyledTableCell align="center">NORMALIZED SCORE</StyledTableCell>
                           </TableRow>
                         </StyledTableCell>
+                        <StyledTableCell align="center">VIEW</StyledTableCell>
                         {/* <StyledTableCell align="center">
                           ANOMALY DETECTED
                         </StyledTableCell> */}
@@ -273,15 +284,35 @@ class EventDetection extends Component {
                             </td>
                             <td>
                               <td align="center">{pmu_loc.pmu1_id}</td>
-                              <td align="center">{pmu_loc.pmu1_bus_id}</td>
+                              <td align="center">
+                              {pmu_loc.pmu1_bus_id} &nbsp;  <Badge color="secondary" badgeContent=" " variant="dot">
+                                
+                                </Badge>
+                              </td>
                               <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td>
                             </td>
                             <td>
                               <td align="center">{pmu_loc.pmu2_id}</td>
-                              <td align="center">{pmu_loc.pmu2_bus_id}</td>
+                              <td align="center">
+                              {pmu_loc.pmu2_bus_id} &nbsp; <Badge color="error" badgeContent=" " variant="dot">
+                              
+                                </Badge>
+                                </td>
                               <td style={{ paddingLeft: "3rem" }} align="right "><b>{pmu_loc.pmu2_norm_score}</b></td>
                             </td>
-
+                            <td>
+                              <IconButton
+                                color="secondary"
+                                aria-label="upload picture"
+                                component="span"
+                                style={{ padding: "5px" }}
+                              >
+                                <VisibilityIcon
+                                  id={pmu_loc.pmu1_bus_id}
+                                  onClick={() => this.mapNodeHighlight(pmu_loc.pmu1_bus_id, pmu_loc.pmu2_bus_id)}
+                                />
+                              </IconButton>
+                            </td>
                             {/*<td>
                               <div
                                 style={{
@@ -364,7 +395,9 @@ class EventDetection extends Component {
           <Grid style={styleObjCharts} container xs={5}>
           <Grid style={{ marginTop: "20px" }} item xs={12}>
               {/* <Paper elevation={3}> */}
-                <Maps />
+                <Maps 
+                  mapnodebusid1={this.state.map_busid1}
+                  mapnodebusid2={this.state.map_busid2}/>
               {/* </Paper> */}
             </Grid>
             <Grid style={{ marginTop: "50px", marginLeft: "-25px" }} item xs={5}>
