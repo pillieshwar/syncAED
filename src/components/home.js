@@ -494,7 +494,9 @@ class Home extends Component {
                         flexDirection: "row",
                       }}
                     >
-                      <IconButton
+                    </div>
+                  </Table>
+                  <IconButton
                         color="primary"
                         variant="contained"
                         onClick={this.prevPageLoc}
@@ -503,6 +505,35 @@ class Home extends Component {
                       >
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
+
+                      {this.state.posts.map((anomaly, id) => (
+                        <IconButton
+                        color="primary"
+                        variant="contained"
+                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        >
+                          {this.state.page < 2 ? (
+                            <IconButton
+                              color="primary"
+                              variant="contained"
+                              onClick={() => this.setPage(id)}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              >
+                                {id + 1}
+                              </IconButton>
+                          ) : 
+                            <IconButton
+                              color="primary"
+                              variant="contained"
+                              onClick={() => this.setPage(this.state.page + id - 2)}
+                              aria-label="Back"
+                              style={{ padding: "5px" }}
+                              >
+                                {this.state.page + id - 1}
+                              </IconButton>}
+                        </IconButton>
+                      ))}
+
                       <IconButton
                         color="primary"
                         variant="contained"
@@ -513,8 +544,6 @@ class Home extends Component {
                       >
                         <ArrowForwardIosRoundedIcon />
                       </IconButton>
-                    </div>
-                  </Table>
                 </TableContainer>
               </Paper>
             </Grid>

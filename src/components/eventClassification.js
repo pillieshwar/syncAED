@@ -85,6 +85,12 @@ class EventClassification extends Component {
     this.getData();
   }
 
+  setPage(id) {
+    API_URL = "http://127.0.0.1:9002/result_pmu_localization/" + (id);
+    this.setState({ page: id });
+    this.getData();
+  }
+
   componentDidMount() {
     console.log("componentDidMount");
     const data = axios.get(API_URL);
@@ -337,7 +343,9 @@ class EventClassification extends Component {
                         flexDirection: "row",
                       }}
                     >
-                      <IconButton
+                    </div>
+                  </Table>
+                  <IconButton
                         color="primary"
                         variant="contained"
                         onClick={this.prevPage}
@@ -346,6 +354,35 @@ class EventClassification extends Component {
                       >
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
+
+                      {this.state.posts.map((pmu_loc, id) => (
+                        <IconButton
+                        color="primary"
+                        variant="contained"
+                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        >
+                          {this.state.page < 2 ? (
+                            <IconButton
+                              color="primary"
+                              variant="contained"
+                              onClick={() => this.setPage(id)}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              >
+                                {id + 1}
+                              </IconButton>
+                          ) : 
+                            <IconButton
+                              color="primary"
+                              variant="contained"
+                              onClick={() => this.setPage(this.state.page + id - 2)}
+                              aria-label="Back"
+                              style={{ padding: "5px" }}
+                              >
+                                {this.state.page + id - 1}
+                              </IconButton>}
+                        </IconButton>
+                      ))}
+
                       <IconButton
                         color="primary"
                         variant="contained"
@@ -356,8 +393,6 @@ class EventClassification extends Component {
                       >
                         <ArrowForwardIosRoundedIcon />
                       </IconButton>
-                    </div>
-                  </Table>
                 </TableContainer>
               </Paper>
             </Grid>
