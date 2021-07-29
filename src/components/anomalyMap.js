@@ -54,15 +54,31 @@ class AnomalyMap extends Component {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+        {this.state.map_edges.length > 0 ? (
+                  this.state.map_edges.map((medge) => (
+                    <Polyline
+                      pathOptions={blueOptions}
+                      positions={[
+                        [medge.from_latitude, medge.from_longitude],
+                        [medge.to_latitude, medge.to_longitude],
+                      ]}
+                    />
+                  ))
+                ) : (
+                  <td>Loading...</td>
+                )}
+
+
         {this.state.map_data.length > 0 ? (
           this.state.map_data.map((mdata) => {
-            return mdata.bus_id === "BUSID_03" ? (
+            return mdata.bus_status>0 ? (
               <CircleMarker
                 center={[mdata.latitude, mdata.longitude]}
                 // pathOptions={greenOptions}
-                fillOpacity={0.6}
+                fillOpacity={1}
                 radius={16}
-                className="blinking-circle-red"
+                className="blinking-circle"
                 // stroke={false}
               >
                 <Popup>
@@ -83,6 +99,29 @@ class AnomalyMap extends Component {
                 </Popup>
               </CircleMarker>
             );
+          })
+        ) : (
+          <td>Loading...</td>
+        )}
+
+{this.state.map_data.length > 0 ? (
+          this.state.map_data.map((mdata) => {
+            return mdata.bus_id === "BUSID_02" ? (
+              <CircleMarker
+                center={[mdata.latitude, mdata.longitude]}
+                // pathOptions={greenOptions}
+                fillOpacity={1}
+                radius={16}
+                className="blinking-circle-red"
+                // stroke={false}
+              >
+                <Popup>
+                  Bus ID : {mdata.bus_id} <br></br> Bus Name : {mdata.bus_name}
+                  <br></br> Lat : {mdata.latitude} <br></br> Lon :
+                  {mdata.longitude}
+                </Popup>
+              </CircleMarker>
+            ) : (console.log("none"));
           })
         ) : (
           <td>Loading...</td>

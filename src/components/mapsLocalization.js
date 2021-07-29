@@ -37,6 +37,14 @@ class MapsLocalization extends Component {
       animation: "fade 1s infinite alternate",
       color: "green",
     };
+    const redOptions = {
+      animation: "fade 1s infinite alternate",
+      color: "red",
+    };
+    const yellowOptions = {
+      animation: "fade 1s infinite alternate",
+      color: "orange",
+    };
 
     return (
       <MapContainer
@@ -55,15 +63,90 @@ class MapsLocalization extends Component {
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+
+
+        
+        {this.state.map_edges.length > 0 ? (
+                  this.state.map_edges.map((medge) => (
+                    <Polyline
+                      pathOptions={blueOptions}
+                      positions={[
+                        [medge.from_latitude, medge.from_longitude],
+                        [medge.to_latitude, medge.to_longitude],
+                      ]}
+                    />
+                  ))
+                ) : (
+                  <td>Loading...</td>
+                )}
+
+
         {this.state.map_data.length > 0 ? (
           this.state.map_data.map((mdata) => {
-            return mdata.bus_id === "BUSID_03" ? (
+            console.log("1,2 : ", this.props.mapnodebusid1, this.props.mapnodebusid2)
+            if (mdata.bus_id === this.props.mapnodebusid1)
+              {
+                return(
+              <CircleMarker
+                center={[mdata.latitude, mdata.longitude]}
+                pathOptions={redOptions}
+                fillOpacity={1.1}
+                radius={20}
+                // className="blinking-circle-red"
+                // stroke={false}
+              >
+                <Popup>
+                  Bus ID : {mdata.bus_id} <br></br> Bus Name : {mdata.bus_name}
+                  <br></br> Lat : {mdata.latitude} <br></br> Lon :
+                  {mdata.longitude}
+                </Popup>
+              </CircleMarker>
+                )}
+            else if (mdata.bus_id === this.props.mapnodebusid2)
+            {
+              return(
+              <CircleMarker
+                center={[mdata.latitude, mdata.longitude]}
+                pathOptions={yellowOptions}
+                fillOpacity={1.1}
+                radius={20}
+              >
+                <Popup>
+                  Bus ID : {mdata.bus_id} <br></br> Bus Name : {mdata.bus_name}
+                  <br></br> Lat : {mdata.latitude} <br></br> Lon :
+                  {mdata.longitude}
+                </Popup>
+              </CircleMarker>
+              )}
+              else{
+                return(
+                  <CircleMarker
+                  center={[mdata.latitude, mdata.longitude]}
+                  pathOptions={blueOptions}
+                  radius={10}
+                >
+                  <Popup>
+                    Bus ID : {mdata.bus_id} <br></br> Bus Name : {mdata.bus_name}
+                    <br></br> Lat : {mdata.latitude} <br></br> Lon :
+                    {mdata.longitude}
+                  </Popup>
+                </CircleMarker>
+                )
+              }
+          })
+        ) : (
+          <td>Loading...</td>
+        )}
+
+{this.state.map_data.length > 0 ? (
+          this.state.map_data.map((mdata) => {
+            return mdata.bus_status>0 ? (
               <CircleMarker
                 center={[mdata.latitude, mdata.longitude]}
                 // pathOptions={greenOptions}
-                fillOpacity={0.6}
+                fillOpacity={1}
                 radius={16}
-                className="blinking-circle-red"
+                className="blinking-circle"
                 // stroke={false}
               >
                 <Popup>
@@ -76,6 +159,7 @@ class MapsLocalization extends Component {
               <CircleMarker
                 center={[mdata.latitude, mdata.longitude]}
                 pathOptions={blueOptions}
+                radius={10}
               >
                 <Popup>
                   Bus ID : {mdata.bus_id} <br></br> Bus Name : {mdata.bus_name}
