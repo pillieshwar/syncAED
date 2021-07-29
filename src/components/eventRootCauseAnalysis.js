@@ -28,6 +28,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
+import Img from '../images/underconstruction.jpeg'
+
 let API_URL = "http://127.0.0.1:9002/result_events_localization/0";
 class EventRootCauseAnalysis extends Component {
   constructor(props) {
@@ -226,7 +228,8 @@ class EventRootCauseAnalysis extends Component {
     };
     return (
       <div class="row">
-        <Grid style={styleObj} container>
+        <img style={{marginLeft: "500px", marginTop: "160px"}} src={Img} alt="website under construction" />
+        {/* <Grid style={styleObj} container>
           <Grid item xs={7}>
             <Grid item xs={12}>
               <Paper elevation={3}>
@@ -284,7 +287,6 @@ class EventRootCauseAnalysis extends Component {
                                   <Button>Cm</Button>
                                   <Button>F</Button>
                                   <Button>Ro</Button>
-                                  {/* color="secondary" */}
                                 </ButtonGroup>
                               </div>
                             </td>
@@ -346,35 +348,10 @@ class EventRootCauseAnalysis extends Component {
           </Grid>
           <Grid style={styleObjCharts} container xs={5}>
           <Grid style={{ marginTop: "20px" }} item xs={12}>
-              {/* <Paper elevation={3}> */}
                 <Maps />
-              {/* </Paper> */}
             </Grid>
-            {/* <Grid style={{ marginTop: "50px", marginLeft: "-25px" }} item xs={5}>
-              {renderLineChart2}
-            </Grid>
-            <Grid item xs={2}></Grid>
-            <Grid style={{ marginTop: "50px", marginLeft: "-22px" }} item xs={5}>
-              {renderLineChart}
-            </Grid> */}
-
-            {/* <Grid style={styleObjCharts2} item xs={5}>
-              {renderLineChart3}
-            </Grid>
-            <Grid item xs={1}></Grid>
-            <Grid style={styleObjCharts2} item xs={5}>
-              {renderLineChart4}
-            </Grid> */}
-
-            {/* <Grid style={styleObjCharts2} item xs={5}>
-              {renderLineChart5}
-            </Grid>
-            <Grid item xs={1}></Grid>
-            <Grid style={styleObjCharts2} item xs={5}>
-              {renderLineChart6}
-            </Grid> */}
           </Grid>
-        </Grid>
+        </Grid> */}
       </div>
     );
   }

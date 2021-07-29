@@ -28,7 +28,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
-import Badge from '@material-ui/core/Badge';
+// import Badge from '@material-ui/core/Badge';
 let API_URL = "http://127.0.0.1:9002/result_pmu_localization/0";
 class EventDetection extends Component {
   constructor(props) {
@@ -285,18 +285,16 @@ class EventDetection extends Component {
                             <td>
                               <td align="center">{pmu_loc.pmu1_id}</td>
                               <td align="center">
-                              {pmu_loc.pmu1_bus_id} &nbsp;  <Badge color="secondary" badgeContent=" " variant="dot">
-                                
-                                </Badge>
+                              {pmu_loc.pmu1_bus_id} &nbsp;  
+                              {/* <Badge color="secondary" badgeContent=" " variant="dot"></Badge> */}
                               </td>
                               <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td>
                             </td>
                             <td>
                               <td align="center">{pmu_loc.pmu2_id}</td>
                               <td align="center">
-                              {pmu_loc.pmu2_bus_id} &nbsp; <Badge color="error" badgeContent=" " variant="dot">
-                              
-                                </Badge>
+                              {pmu_loc.pmu2_bus_id} &nbsp; 
+                              {/* <Badge color="error" badgeContent=" " variant="dot"></Badge> */}
                                 </td>
                               <td style={{ paddingLeft: "3rem" }} align="right "><b>{pmu_loc.pmu2_norm_score}</b></td>
                             </td>
