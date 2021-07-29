@@ -248,6 +248,7 @@ function App() {
                               />
                             }
                             label="Anomoly Detection"
+                            style={{marginLeft: "-3px"}}
                           />
                         </Grid>
                         <Grid item xs={4}>
@@ -261,6 +262,7 @@ function App() {
                               />
                             }
                             label="Event Detection"
+                            style={{marginLeft: "22px"}}
                           />
                         </Grid>
                       </FormGroup>
@@ -283,6 +285,7 @@ function App() {
                               />
                             }
                             label="DBScan"
+                            style={{marginLeft: "-3px"}}
                           />
                         </Grid>
                         <Grid item xs={4}>
@@ -295,6 +298,7 @@ function App() {
                               />
                             }
                             label="Linear Regression"
+                            style={{marginLeft: "22px"}}
                           />
                         </Grid>
                       </FormGroup>
@@ -318,6 +322,7 @@ function App() {
                               />
                             }
                             label="Detect & Flag"
+                            style={{marginLeft: "5px"}}
                           />
                         </Grid>
                         <Grid item xs={3}>
@@ -330,6 +335,7 @@ function App() {
                               />
                             }
                             label="Mitigate & Replace"
+                            style={{marginLeft: "-4px"}}
                           />
                         </Grid>
                       </FormGroup>
