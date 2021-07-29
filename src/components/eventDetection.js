@@ -38,8 +38,8 @@ class EventDetection extends Component {
       page: 0,
       subsetdata: [],
       chart_data: [],
-      map_busid1: "",
-      map_busid2: "",
+      map_busid1: "BUSID_09",
+      map_busid2: "BUSID_10",
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
@@ -50,8 +50,8 @@ class EventDetection extends Component {
 
   mapNodeHighlight(busid1, busid2){
     console.log("mapbusid : ", this.state.map_busid1)
-    this.setState({ map_busid1: busid1 || "BUSID_03"});
-    this.setState({ map_busid2: busid2 || "BUSID_02"});
+    this.setState({ map_busid1: busid1 || "BUSID_09"});
+    this.setState({ map_busid2: busid2 || "BUSID_10"});
   };
 
   loadCharts(id) {

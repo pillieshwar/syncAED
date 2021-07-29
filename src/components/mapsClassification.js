@@ -88,7 +88,7 @@ class MapsClassification extends Component {
                 center={[mdata.latitude, mdata.longitude]}
                 pathOptions={redOptions}
                 fillOpacity={1}
-                radius={18}
+                radius={17}
                 // className="blinking-circle-red"
                 // stroke={false}
               >
@@ -129,7 +129,7 @@ return (
                 center={[mdata.latitude, mdata.longitude]}
                 // pathOptions={greenOptions}
                 fillOpacity={1}
-                radius={16}
+                radius={14}
                 className="blinking-circle"
                 // stroke={false}
               >
