@@ -29,7 +29,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
 let API_URL = "http://127.0.0.1:9002/result_events_localization/0";
-class EventClassification extends Component {
+class EventRootCauseAnalysis extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -240,9 +240,11 @@ class EventClassification extends Component {
                         <StyledTableCell align="center">
                           ANOMALY DETECTED
                         </StyledTableCell>
+                        <StyledTableCell>LOCATION</StyledTableCell>
                         <StyledTableCell>CONFIDENTIAL LEVEL</StyledTableCell>
                         <StyledTableCell>DETECTOR</StyledTableCell>
                         <StyledTableCell>VIEW</StyledTableCell>
+                        <StyledTableCell>EVENT TYPE</StyledTableCell>
                       </TableRow>
                     </TableHead>
                     <tbody>
@@ -378,4 +380,4 @@ class EventClassification extends Component {
   }
 }
 
-export default EventClassification;
+export default EventRootCauseAnalysis;
