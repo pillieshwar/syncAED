@@ -91,7 +91,7 @@ class MapsLocalization extends Component {
                 center={[mdata.latitude, mdata.longitude]}
                 pathOptions={redOptions}
                 fillOpacity={1.1}
-                radius={20}
+                radius={17}
                 // className="blinking-circle-red"
                 // stroke={false}
               >
@@ -109,7 +109,7 @@ class MapsLocalization extends Component {
                 center={[mdata.latitude, mdata.longitude]}
                 pathOptions={yellowOptions}
                 fillOpacity={1.1}
-                radius={20}
+                radius={17}
               >
                 <Popup>
                   Bus ID : {mdata.bus_id} <br></br> Bus Name : {mdata.bus_name}
@@ -145,7 +145,7 @@ class MapsLocalization extends Component {
                 center={[mdata.latitude, mdata.longitude]}
                 // pathOptions={greenOptions}
                 fillOpacity={1}
-                radius={16}
+                radius={14}
                 className="blinking-circle"
                 // stroke={false}
               >
