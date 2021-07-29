@@ -58,6 +58,12 @@ class AnomalyDetection extends Component {
     this.getData();
   }
 
+  setPage(id) {
+    API_URL = "http://127.0.0.1:9002/main_result_events/" + (id);
+    this.setState({ page: id });
+    this.getData();
+  }
+
   handleChange() {
     console.log(this.state.page);
   }
@@ -399,7 +405,7 @@ class AnomalyDetection extends Component {
                                 </ButtonGroup>
                               </div>
                             </td>
-
+                            {/*<td>{anomaly.vol_mag}</td>*/}
                             <td>32.37111871</td>
                             <td>1</td>
                             <td>
@@ -428,7 +434,9 @@ class AnomalyDetection extends Component {
                         flexDirection: "row",
                       }}
                     >
-                      <IconButton
+                    </div>
+                  </Table>
+                  <IconButton
                         color="primary"
                         variant="contained"
                         onClick={this.prevPage}
@@ -437,6 +445,37 @@ class AnomalyDetection extends Component {
                       >
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
+
+                      {this.state.posts.map((anomaly, id) => (
+                        <IconButton
+                        color="primary"
+                        variant="contained"
+                        aria-label="Back"
+                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        >
+                          {this.state.page < 2 ? (
+                            <IconButton
+                              color="primary"
+                              variant="contained"
+                              onClick={() => this.setPage(id)}
+                              aria-label="Back"
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              >
+                                {id + 1}
+                              </IconButton>
+                          ) : 
+                            <IconButton
+                              color="primary"
+                              variant="contained"
+                              onClick={() => this.setPage(this.state.page + id - 2)}
+                              aria-label="Back"
+                              style={{ padding: "5px" }}
+                              >
+                                {this.state.page + id - 1}
+                              </IconButton>}
+                        </IconButton>
+                      ))}
+
                       <IconButton
                         color="primary"
                         variant="contained"
@@ -447,8 +486,6 @@ class AnomalyDetection extends Component {
                       >
                         <ArrowForwardIosRoundedIcon />
                       </IconButton>
-                    </div>
-                  </Table>
                 </TableContainer>
               </Paper>
             </Grid>
