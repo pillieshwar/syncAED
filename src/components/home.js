@@ -51,10 +51,16 @@ class Home extends Component {
   }
 
   nextPage() {
-    console.log("next " + this.state.page);
+    //console.log("next " + this.state.page);
     API_URL =
       "http://127.0.0.1:9002/main_result_events/" + (this.state.page + 1);
     this.setState({ page: this.state.page + 1 });
+    this.getData();
+  }
+
+  setPage(id) {
+    API_URL = "http://127.0.0.1:9002/main_result_events/" + (id);
+    this.setState({ page: id });
     this.getData();
   }
 
@@ -109,6 +115,8 @@ class Home extends Component {
       },
     }))(TableRow);
 
+    console.log("hi")
+
     return (
       <div class="row">
         <Grid style={styleObj} container>
@@ -131,8 +139,7 @@ class Home extends Component {
                         <StyledTableCell>CONFIDENTIAL LEVEL</StyledTableCell>
                         <StyledTableCell>DETECTOR</StyledTableCell>
                       </TableRow>
-                    </TableHead>
-
+                    </TableHead> 
                     <tbody>
                       {this.state.posts.length > 0 ? (
                         this.state.posts.map((anomaly) => (
@@ -192,7 +199,7 @@ class Home extends Component {
                           </tr>
                         ))
                       ) : (
-                        <td>Loading...</td>
+                        <td>{eventData.pmu_id}</td>
                       )}
                     </tbody>
                     <div
@@ -203,7 +210,11 @@ class Home extends Component {
                         padding: "5px",
                       }}
                     >
-                      <IconButton
+                      
+                    </div>
+                  </Table>
+
+                  <IconButton
                         color="primary"
                         variant="contained"
                         onClick={this.prevPage}
@@ -212,6 +223,37 @@ class Home extends Component {
                       >
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
+
+                      {this.state.posts.map((anomaly, id) => (
+                        <IconButton
+                        color="primary"
+                        variant="contained"
+                        aria-label="Back"
+                        style={{ padding: "5px" }}
+                        >
+                          {this.state.page < 2 ? (
+                            <IconButton
+                              color="primary"
+                              variant="contained"
+                              onClick={() => this.setPage(id)}
+                              aria-label="Back"
+                              style={{ padding: "5px" }}
+                              >
+                                {id + 1}
+                              </IconButton>
+                          ) : 
+                            <IconButton
+                              color="primary"
+                              variant="contained"
+                              onClick={() => this.setPage(this.state.page + id - 2)}
+                              aria-label="Back"
+                              style={{ padding: "5px" }}
+                              >
+                                {this.state.page + id - 1}
+                              </IconButton>}
+                        </IconButton>
+                      ))}
+
                       <IconButton
                         color="primary"
                         variant="contained"
@@ -222,8 +264,7 @@ class Home extends Component {
                       >
                         <ArrowForwardIosRoundedIcon />
                       </IconButton>
-                    </div>
-                  </Table>
+
                 </TableContainer>
               </Paper>
             </Grid>
