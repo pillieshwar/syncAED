@@ -37,7 +37,7 @@ class EventClassification extends Component {
       page: 0,
       subsetdata: [],
       chart_data: [],
-      map_busid: "",
+      map_busid: "BUSID_09",
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
@@ -48,7 +48,7 @@ class EventClassification extends Component {
 
   mapNodeHighlight(busid){
     console.log("mapbusid : ", this.state.map_busid)
-    this.setState({ map_busid: busid || "BUSID_03"});
+    this.setState({ map_busid: busid || "BUSID_09"});
   };
   
   loadCharts(id) {
@@ -273,9 +273,7 @@ class EventClassification extends Component {
                             </td>
                             <td>{pmu_loc.pmu1_id}</td>
                             <td>
-                              {/* <td align="center">{pmu_loc.pmu1_id}</td> */}
                               <td align="center">{pmu_loc.pmu1_bus_id}</td>
-                              {/* <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td> */}
                             </td>
                             <td>{pmu_loc.event_type}</td>
                             <td>
@@ -291,45 +289,6 @@ class EventClassification extends Component {
                                 />
                               </IconButton>
                             </td>
-                             {/*<td>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  fontSize: "0.2rem",
-                                }}
-                              >
-                                <ButtonGroup
-                                  size="small"
-                                  grouped="minWidth:28"
-                                  color="primary"
-                                  aria-label="outlined primary button group"
-                                >
-                                  <Button>Va</Button>
-                                  <Button>Vm</Button>
-                                  <Button>Ca</Button>
-                                  <Button>Cm</Button>
-                                  <Button>F</Button>
-                                  <Button>Ro</Button>
-                                </ButtonGroup>
-                              </div>
-                            </td>
-
-                            <td>32.37111871</td>
-                            <td>1</td>
-                            <td>
-                              <IconButton
-                                color="secondary"
-                                aria-label="upload picture"
-                                component="span"
-                                style={{ padding: "5px" }}
-                              >
-                                <VisibilityIcon
-                                  id={anomaly.id}
-                                  onClick={() => this.loadCharts(anomaly.id)}
-                                />
-                              </IconButton>
-                            </td> */}
                           </tr>
                         ))
                       ) : (
@@ -355,18 +314,33 @@ class EventClassification extends Component {
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
 
-                      {this.state.posts.map((pmu_loc, id) => (
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPage(0)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >1</IconButton>
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPage(1)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >2</IconButton>
+
+                      {/* Hard coded the buttons because there were only 2 pages. Below is the code to loop through multiple pages*/}
+
+                      {/*{this.state.posts.map((pmu_loc, id) => (
                         <IconButton
                         color="primary"
                         variant="contained"
-                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        style={{ padding: "0px", height: "20px", width:"10px" }}
                         >
                           {this.state.page < 2 ? (
                             <IconButton
                               color="primary"
                               variant="contained"
                               onClick={() => this.setPage(id)}
-                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {id + 1}
                               </IconButton>
@@ -376,12 +350,12 @@ class EventClassification extends Component {
                               variant="contained"
                               onClick={() => this.setPage(this.state.page + id - 2)}
                               aria-label="Back"
-                              style={{ padding: "5px" }}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {this.state.page + id - 1}
                               </IconButton>}
                         </IconButton>
-                      ))}
+                          ))}*/}
 
                       <IconButton
                         color="primary"

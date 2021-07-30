@@ -79,6 +79,14 @@ class Home extends Component {
     this.getDataLoc();
   }
 
+  setPageLoc(id) {
+    console.log("idrrr " + id)
+    API_LOCALIZATION_URL = "http://127.0.0.1:9002/result_pmu_localization_overview/" + (id);
+    console.log("url: " + API_URL)
+    this.setState({ locpage: id });
+    this.getDataLoc();
+  }
+
   handleChange() {
     console.log(this.state.page);
   }
@@ -375,14 +383,14 @@ class Home extends Component {
                         <IconButton
                         color="primary"
                         variant="contained"
-                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        style={{ padding: "10px", height: "20px", width:"10px" }}
                         >
                           {this.state.page < 2 ? (
                             <IconButton
                               color="primary"
                               variant="contained"
                               onClick={() => this.setPage(id)}
-                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {id + 1}
                               </IconButton>
@@ -392,7 +400,7 @@ class Home extends Component {
                               variant="contained"
                               onClick={() => this.setPage(this.state.page + id - 2)}
                               aria-label="Back"
-                              style={{ padding: "5px" }}
+                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {this.state.page + id - 1}
                               </IconButton>}
@@ -506,18 +514,39 @@ class Home extends Component {
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
 
-                      {this.state.posts.map((anomaly, id) => (
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPageLoc(0)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >1</IconButton>
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPageLoc(1)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >2</IconButton>
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPageLoc(2)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >3</IconButton>
+
+                      {/* Hard coded the buttons because there were only 3 pages. Below is the code to loop through multiple pages*/}
+
+                      {/*{this.state.posts.map((anomaly, id) => (
                         <IconButton
                         color="primary"
                         variant="contained"
-                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        style={{ padding: "10px", height: "20px", width:"10px" }}
                         >
-                          {this.state.page < 2 ? (
+                          {this.state.locpage < 2 ? (
                             <IconButton
                               color="primary"
                               variant="contained"
-                              onClick={() => this.setPage(id)}
-                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              onClick={() => this.setPageLoc(id)}
+                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {id + 1}
                               </IconButton>
@@ -525,14 +554,14 @@ class Home extends Component {
                             <IconButton
                               color="primary"
                               variant="contained"
-                              onClick={() => this.setPage(this.state.page + id - 2)}
+                              onClick={() => this.setPageLoc(this.state.locpage + id - 2)}
                               aria-label="Back"
-                              style={{ padding: "5px" }}
+                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
-                                {this.state.page + id - 1}
+                                {this.state.locpage + id - 1}
                               </IconButton>}
                         </IconButton>
-                      ))}
+                          ))}*/}
 
                       <IconButton
                         color="primary"

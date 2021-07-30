@@ -28,7 +28,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
-import Badge from '@material-ui/core/Badge';
+// import Badge from '@material-ui/core/Badge';
 let API_URL = "http://127.0.0.1:9002/result_pmu_localization/0";
 class EventDetection extends Component {
   constructor(props) {
@@ -38,8 +38,8 @@ class EventDetection extends Component {
       page: 0,
       subsetdata: [],
       chart_data: [],
-      map_busid1: "",
-      map_busid2: "",
+      map_busid1: "BUSID_09",
+      map_busid2: "BUSID_10",
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
@@ -50,8 +50,8 @@ class EventDetection extends Component {
 
   mapNodeHighlight(busid1, busid2){
     console.log("mapbusid : ", this.state.map_busid1)
-    this.setState({ map_busid1: busid1 || "BUSID_03"});
-    this.setState({ map_busid2: busid2 || "BUSID_02"});
+    this.setState({ map_busid1: busid1 || "BUSID_09"});
+    this.setState({ map_busid2: busid2 || "BUSID_10"});
   };
 
   loadCharts(id) {
@@ -291,18 +291,16 @@ class EventDetection extends Component {
                             <td>
                               <td align="center">{pmu_loc.pmu1_id}</td>
                               <td align="center">
-                              {pmu_loc.pmu1_bus_id} &nbsp;  <Badge color="secondary" badgeContent=" " variant="dot">
-                                
-                                </Badge>
+                              {pmu_loc.pmu1_bus_id} &nbsp;  
+                              {/* <Badge color="secondary" badgeContent=" " variant="dot"></Badge> */}
                               </td>
                               <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td>
                             </td>
                             <td>
                               <td align="center">{pmu_loc.pmu2_id}</td>
                               <td align="center">
-                              {pmu_loc.pmu2_bus_id} &nbsp; <Badge color="error" badgeContent=" " variant="dot">
-                              
-                                </Badge>
+                              {pmu_loc.pmu2_bus_id} &nbsp; 
+                              {/* <Badge color="error" badgeContent=" " variant="dot"></Badge> */}
                                 </td>
                               <td style={{ paddingLeft: "3rem" }} align="right "><b>{pmu_loc.pmu2_norm_score}</b></td>
                             </td>
@@ -383,18 +381,33 @@ class EventDetection extends Component {
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
 
-                      {this.state.posts.map((pmu_loc, id) => (
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPage(0)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >1</IconButton>
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPage(1)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >2</IconButton>
+
+                      {/* Hard coded the buttons because there were only 2 pages. Below is the code to loop through multiple pages*/}
+
+                      {/*{this.state.posts.map((pmu_loc, id) => (
                         <IconButton
                         color="primary"
                         variant="contained"
-                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        style={{ padding: "5px", height: "20px", width:"10px" }}
                         >
                           {this.state.page < 2 ? (
                             <IconButton
                               color="primary"
                               variant="contained"
                               onClick={() => this.setPage(id)}
-                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {id + 1}
                               </IconButton>
@@ -404,12 +417,12 @@ class EventDetection extends Component {
                               variant="contained"
                               onClick={() => this.setPage(this.state.page + id - 2)}
                               aria-label="Back"
-                              style={{ padding: "5px" }}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {this.state.page + id - 1}
                               </IconButton>}
                         </IconButton>
-                      ))}
+                          ))}*/}
 
                       <IconButton
                         color="primary"
@@ -425,10 +438,20 @@ class EventDetection extends Component {
               </Paper>
             </Grid>
 
-            
           </Grid>
-          <Grid style={styleObjCharts} container xs={5}>
-          <Grid style={{ marginTop: "20px" }} item xs={12}>
+          
+          <Grid style={styleObjCharts} container xs={4}>
+          <Grid style={{ marginTop: "0px", marginLeft:"0px" }} item xs={12}>
+          {/*<Table style={{maxWidth: "90", height: "30px", border: "1px solid black", padding: "5px", margin: "20px"}}>
+            <tr> 
+              <td>color box</td>
+              <td>pmu1</td>
+            </tr>
+            <tr>
+              <td>color box</td>
+              <td>pmu2</td>
+            </tr>
+                          </Table>*/}
               {/* <Paper elevation={3}> */}
                 <Maps 
                   mapnodebusid1={this.state.map_busid1}
