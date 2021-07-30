@@ -451,7 +451,7 @@ class AnomalyDetection extends Component {
                         color="primary"
                         variant="contained"
                         aria-label="Back"
-                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        style={{ padding: "10px", height: "20px", width:"20px" }}
                         >
                           {this.state.page < 2 ? (
                             <IconButton
@@ -459,7 +459,7 @@ class AnomalyDetection extends Component {
                               variant="contained"
                               onClick={() => this.setPage(id)}
                               aria-label="Back"
-                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {id + 1}
                               </IconButton>
@@ -469,7 +469,7 @@ class AnomalyDetection extends Component {
                               variant="contained"
                               onClick={() => this.setPage(this.state.page + id - 2)}
                               aria-label="Back"
-                              style={{ padding: "5px" }}
+                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {this.state.page + id - 1}
                               </IconButton>}

@@ -355,18 +355,33 @@ class EventClassification extends Component {
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
 
-                      {this.state.posts.map((pmu_loc, id) => (
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPage(0)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >1</IconButton>
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPage(1)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >2</IconButton>
+
+                      {/* Hard coded the buttons because there were only 2 pages. Below is the code to loop through multiple pages*/}
+
+                      {/*{this.state.posts.map((pmu_loc, id) => (
                         <IconButton
                         color="primary"
                         variant="contained"
-                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        style={{ padding: "0px", height: "20px", width:"10px" }}
                         >
                           {this.state.page < 2 ? (
                             <IconButton
                               color="primary"
                               variant="contained"
                               onClick={() => this.setPage(id)}
-                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {id + 1}
                               </IconButton>
@@ -376,12 +391,12 @@ class EventClassification extends Component {
                               variant="contained"
                               onClick={() => this.setPage(this.state.page + id - 2)}
                               aria-label="Back"
-                              style={{ padding: "5px" }}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {this.state.page + id - 1}
                               </IconButton>}
                         </IconButton>
-                      ))}
+                          ))}*/}
 
                       <IconButton
                         color="primary"

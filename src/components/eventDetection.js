@@ -383,18 +383,33 @@ class EventDetection extends Component {
                         <ArrowBackIosRoundedIcon />
                       </IconButton>
 
-                      {this.state.posts.map((pmu_loc, id) => (
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPage(0)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >1</IconButton>
+                      <IconButton
+                        color="primary"
+                        variant="contained"
+                        onClick={() => this.setPage(1)}
+                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
+                      >2</IconButton>
+
+                      {/* Hard coded the buttons because there were only 2 pages. Below is the code to loop through multiple pages*/}
+
+                      {/*{this.state.posts.map((pmu_loc, id) => (
                         <IconButton
                         color="primary"
                         variant="contained"
-                        style={{ padding: "0px", height: "20px", width:"20px" }}
+                        style={{ padding: "5px", height: "20px", width:"10px" }}
                         >
                           {this.state.page < 2 ? (
                             <IconButton
                               color="primary"
                               variant="contained"
                               onClick={() => this.setPage(id)}
-                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"20px" }}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {id + 1}
                               </IconButton>
@@ -404,12 +419,12 @@ class EventDetection extends Component {
                               variant="contained"
                               onClick={() => this.setPage(this.state.page + id - 2)}
                               aria-label="Back"
-                              style={{ padding: "5px" }}
+                              style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
                               >
                                 {this.state.page + id - 1}
                               </IconButton>}
                         </IconButton>
-                      ))}
+                          ))}*/}
 
                       <IconButton
                         color="primary"
@@ -425,10 +440,20 @@ class EventDetection extends Component {
               </Paper>
             </Grid>
 
-            
           </Grid>
-          <Grid style={styleObjCharts} container xs={5}>
-          <Grid style={{ marginTop: "20px" }} item xs={12}>
+          
+          <Grid style={styleObjCharts} container xs={4}>
+          <Grid style={{ marginTop: "0px", marginLeft:"0px" }} item xs={12}>
+          {/*<Table style={{maxWidth: "90", height: "30px", border: "1px solid black", padding: "5px", margin: "20px"}}>
+            <tr> 
+              <td>color box</td>
+              <td>pmu1</td>
+            </tr>
+            <tr>
+              <td>color box</td>
+              <td>pmu2</td>
+            </tr>
+                          </Table>*/}
               {/* <Paper elevation={3}> */}
                 <Maps 
                   mapnodebusid1={this.state.map_busid1}
