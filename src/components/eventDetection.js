@@ -439,19 +439,27 @@ class EventDetection extends Component {
             </Grid>
 
           </Grid>
-          
+         
           <Grid style={styleObjCharts} container xs={4}>
           <Grid style={{ marginTop: "0px", marginLeft:"0px" }} item xs={12}>
-          {/*<Table style={{maxWidth: "90", height: "30px", border: "1px solid black", padding: "5px", margin: "20px"}}>
-            <tr> 
-              <td>color box</td>
-              <td>pmu1</td>
+          <Table style = {{height : "50px", width:"25%", padding:"10px", border:"1px"}}>
+            <tr > 
+              <td>PMU1</td>
+              <td>
+                <div style={{backgroundColor:"red", height : "50%", width:"100%", marginLeft:"25%", padding:"5px"}}></div>
+              </td>
             </tr>
             <tr>
-              <td>color box</td>
-              <td>pmu2</td>
+              <td>PMU2</td>
+              <td>
+                <div style={{backgroundColor:"orange", height : "50%", width:"100%", marginLeft:"25%", padding:"5px"}}></div>
+              </td>
             </tr>
-                          </Table>*/}
+            <tr>
+              <td>
+              </td>
+            </tr>
+          </Table>
               {/* <Paper elevation={3}> */}
                 <Maps 
                   mapnodebusid1={this.state.map_busid1}
