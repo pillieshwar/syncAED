@@ -37,7 +37,7 @@ class EventClassification extends Component {
       page: 0,
       subsetdata: [],
       chart_data: [],
-      map_busid: "",
+      map_busid: "BUSID_09",
     };
     this.nextPage = this.nextPage.bind(this);
     this.prevPage = this.prevPage.bind(this);
@@ -48,7 +48,7 @@ class EventClassification extends Component {
 
   mapNodeHighlight(busid){
     console.log("mapbusid : ", this.state.map_busid)
-    this.setState({ map_busid: busid || "BUSID_03"});
+    this.setState({ map_busid: busid || "BUSID_09"});
   };
   
   loadCharts(id) {
@@ -273,9 +273,7 @@ class EventClassification extends Component {
                             </td>
                             <td>{pmu_loc.pmu1_id}</td>
                             <td>
-                              {/* <td align="center">{pmu_loc.pmu1_id}</td> */}
                               <td align="center">{pmu_loc.pmu1_bus_id}</td>
-                              {/* <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td> */}
                             </td>
                             <td>{pmu_loc.event_type}</td>
                             <td>
@@ -291,45 +289,6 @@ class EventClassification extends Component {
                                 />
                               </IconButton>
                             </td>
-                             {/*<td>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  fontSize: "0.2rem",
-                                }}
-                              >
-                                <ButtonGroup
-                                  size="small"
-                                  grouped="minWidth:28"
-                                  color="primary"
-                                  aria-label="outlined primary button group"
-                                >
-                                  <Button>Va</Button>
-                                  <Button>Vm</Button>
-                                  <Button>Ca</Button>
-                                  <Button>Cm</Button>
-                                  <Button>F</Button>
-                                  <Button>Ro</Button>
-                                </ButtonGroup>
-                              </div>
-                            </td>
-
-                            <td>32.37111871</td>
-                            <td>1</td>
-                            <td>
-                              <IconButton
-                                color="secondary"
-                                aria-label="upload picture"
-                                component="span"
-                                style={{ padding: "5px" }}
-                              >
-                                <VisibilityIcon
-                                  id={anomaly.id}
-                                  onClick={() => this.loadCharts(anomaly.id)}
-                                />
-                              </IconButton>
-                            </td> */}
                           </tr>
                         ))
                       ) : (
