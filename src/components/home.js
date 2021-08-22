@@ -166,6 +166,8 @@ class Home extends Component {
     var btn_color_f = "primary"
     var btn_color_rocof = "primary"
 
+    var confidence_level = 32.37111871
+
     return (
       <div class="row">
         <Grid style={styleObj} container>
@@ -179,13 +181,14 @@ class Home extends Component {
                   <Table aria-label="customized table">
                     <TableHead>
                       <TableRow>
-                        <StyledTableCell>WINDOW TIME</StyledTableCell>
+                        <StyledTableCell>DATE/TIME</StyledTableCell>
                         <StyledTableCell>PMU ID</StyledTableCell>
                         <StyledTableCell>BUS ID</StyledTableCell>
                         <StyledTableCell align="center">
                           ANOMALY DETECTED
                         </StyledTableCell>
-                        <StyledTableCell>CONFIDENTIAL LEVEL</StyledTableCell>
+                        <StyledTableCell>CONFIDENCE LEVEL</StyledTableCell>
+                        <StyledTableCell>ANOMALY TYPE</StyledTableCell>
                         <StyledTableCell>DETECTOR</StyledTableCell>
                       </TableRow>
                     </TableHead> 
@@ -337,7 +340,8 @@ class Home extends Component {
                               </div>
                             </td>
 
-                            <td>32.37111871</td>
+                            <td>{anomaly.confidence_level}</td>
+                            <td>type</td>
                             <td>1</td>
                             {/* <td>
                             <IconButton
