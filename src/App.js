@@ -187,7 +187,7 @@ function App() {
               />
               <Tab
                 style={{ color: "black" }}
-                label="Anomaly Detection"
+                label="Anomaly Detection & CLASSIFICATION"
                 {...a11yProps(1)}
               />
               <Tab
@@ -202,7 +202,7 @@ function App() {
               />
               <Tab
                 style={{ color: "black" }}
-                label="Event Root Cause Analysis"
+                label="Root Cause Analysis"
                 {...a11yProps(4)}
               />
             </Tabs>
@@ -248,7 +248,7 @@ function App() {
                               />
                             }
                             label="Anomoly Detection"
-                            style={{marginLeft: "-3px"}}
+                            style={{ marginLeft: "-3px" }}
                           />
                         </Grid>
                         <Grid item xs={4}>
@@ -262,7 +262,7 @@ function App() {
                               />
                             }
                             label="Event Detection"
-                            style={{marginLeft: "22px"}}
+                            style={{ marginLeft: "22px" }}
                           />
                         </Grid>
                       </FormGroup>
@@ -285,7 +285,7 @@ function App() {
                               />
                             }
                             label="DBScan"
-                            style={{marginLeft: "-3px"}}
+                            style={{ marginLeft: "-3px" }}
                           />
                         </Grid>
                         <Grid item xs={4}>
@@ -298,7 +298,7 @@ function App() {
                               />
                             }
                             label="Linear Regression"
-                            style={{marginLeft: "22px"}}
+                            style={{ marginLeft: "22px" }}
                           />
                         </Grid>
                       </FormGroup>
@@ -322,7 +322,7 @@ function App() {
                               />
                             }
                             label="Detect & Flag"
-                            style={{marginLeft: "5px"}}
+                            style={{ marginLeft: "5px" }}
                           />
                         </Grid>
                         <Grid item xs={3}>
@@ -335,7 +335,7 @@ function App() {
                               />
                             }
                             label="Mitigate & Replace"
-                            style={{marginLeft: "-4px"}}
+                            style={{ marginLeft: "-4px" }}
                           />
                         </Grid>
                       </FormGroup>

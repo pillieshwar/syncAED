@@ -26,10 +26,11 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
-import Badge from '@material-ui/core/Badge';
+import Badge from "@material-ui/core/Badge";
 
 let API_URL = "http://127.0.0.1:9002/main_result_events/0";
-let API_LOCALIZATION_URL = "http://127.0.0.1:9002/result_pmu_localization_overview/0";
+let API_LOCALIZATION_URL =
+  "http://127.0.0.1:9002/result_pmu_localization_overview/0";
 
 class Home extends Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class Home extends Component {
   }
 
   setPage(id) {
-    API_URL = "http://127.0.0.1:9002/main_result_events/" + (id);
+    API_URL = "http://127.0.0.1:9002/main_result_events/" + id;
     this.setState({ page: id });
     this.getData();
   }
@@ -74,15 +75,17 @@ class Home extends Component {
   nextPageLoc() {
     console.log("next " + this.state.locpage);
     API_LOCALIZATION_URL =
-      "http://127.0.0.1:9002/result_pmu_localization_overview/" + (this.state.locpage + 1);
+      "http://127.0.0.1:9002/result_pmu_localization_overview/" +
+      (this.state.locpage + 1);
     this.setState({ locpage: this.state.locpage + 1 });
     this.getDataLoc();
   }
 
   setPageLoc(id) {
-    console.log("idrrr " + id)
-    API_LOCALIZATION_URL = "http://127.0.0.1:9002/result_pmu_localization_overview/" + (id);
-    console.log("url: " + API_URL)
+    console.log("idrrr " + id);
+    API_LOCALIZATION_URL =
+      "http://127.0.0.1:9002/result_pmu_localization_overview/" + id;
+    console.log("url: " + API_URL);
     this.setState({ locpage: id });
     this.getDataLoc();
   }
@@ -117,7 +120,8 @@ class Home extends Component {
     console.log("prev " + this.state.locpage);
     if (this.state.locpage >= 0) {
       API_LOCALIZATION_URL =
-        "http://127.0.0.1:9002/result_pmu_localization_overview/" + (this.state.locpage - 1);
+        "http://127.0.0.1:9002/result_pmu_localization_overview/" +
+        (this.state.locpage - 1);
     }
     if (this.state.locpage > 0) {
       this.setState({ locpage: this.state.locpage - 1 });
@@ -129,10 +133,9 @@ class Home extends Component {
     console.log("componentDidMount");
     const data = axios.get(API_URL);
     data.then((res) => this.setState({ posts: res.data || [] }));
-    // this.loadCharts(1);
     const locdata = axios.get(API_LOCALIZATION_URL);
     locdata.then((res) => this.setState({ loc: res.data || [] }));
-    console.log("loc",this.state.loc)
+    console.log("loc", this.state.loc);
     this.loadCharts(1);
   }
   render() {
@@ -159,12 +162,12 @@ class Home extends Component {
       },
     }))(TableRow);
 
-    var btn_color_va = "primary"
-    var btn_color_ca = "primary"
-    var btn_color_vm = "primary"
-    var btn_color_cm = "primary"
-    var btn_color_f = "primary"
-    var btn_color_rocof = "primary"
+    var btn_color_va = "primary";
+    var btn_color_ca = "primary";
+    var btn_color_vm = "primary";
+    var btn_color_cm = "primary";
+    var btn_color_f = "primary";
+    var btn_color_rocof = "primary";
 
     return (
       <div class="row">
@@ -179,16 +182,21 @@ class Home extends Component {
                   <Table aria-label="customized table">
                     <TableHead>
                       <TableRow>
-                        <StyledTableCell>WINDOW TIME</StyledTableCell>
+                        <StyledTableCell>END TIME</StyledTableCell>
                         <StyledTableCell>PMU ID</StyledTableCell>
                         <StyledTableCell>BUS ID</StyledTableCell>
                         <StyledTableCell align="center">
                           ANOMALY DETECTED
                         </StyledTableCell>
-                        <StyledTableCell>CONFIDENTIAL LEVEL</StyledTableCell>
-                        <StyledTableCell>DETECTOR</StyledTableCell>
+                        <StyledTableCell>CONFIDENCE LEVEL</StyledTableCell>
+                        <StyledTableCell>
+                          ANOMALY CLASSIFICATION
+                        </StyledTableCell>
+                        {/* <StyledTableCell>
+                          ANOMALY CLASSIFICATION
+                        </StyledTableCell> */}
                       </TableRow>
-                    </TableHead> 
+                    </TableHead>
                     <tbody>
                       {this.state.posts.length > 0 ? (
                         this.state.posts.map((anomaly) => (
@@ -221,108 +229,137 @@ class Home extends Component {
                                   aria-label="outlined primary button group"
                                 >
                                   {(() => {
-                                    const tt = anomaly.event_time
-                                    if(tt.substring(0, 5) === '00:47'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '17:35' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '16:48' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '18:23' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '15:11' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '01:35' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '02:24' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '15:59' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '19:12' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '19:59' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '20:47' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '21:36' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '22:23:' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '23:11' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '00:00' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '03:59' && anomaly.pmu_id==='PMU_01'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else {
-                                    btn_color_va = "primary"
-                                    btn_color_ca = "primary"
-                                    btn_color_rocof = "primary"
-                                    btn_color_vm = "primary"
-                                    btn_color_cm = "primary"
-                                    btn_color_f = "primary"
+                                    const tt = anomaly.event_time;
+                                    if (tt.substring(0, 5) === "00:47") {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "17:35" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "16:48" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "18:23" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "15:11" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "01:35" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "02:24" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "15:59" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "19:12" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "19:59" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "20:47" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "21:36" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "22:23:" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "23:11" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "00:00" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "03:59" &&
+                                      anomaly.pmu_id === "PMU_01"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else {
+                                      btn_color_va = "primary";
+                                      btn_color_ca = "primary";
+                                      btn_color_rocof = "primary";
+                                      btn_color_vm = "primary";
+                                      btn_color_cm = "primary";
+                                      btn_color_f = "primary";
                                     }
                                   })()}
 
@@ -332,25 +369,12 @@ class Home extends Component {
                                   <Button color={btn_color_cm}>Cm</Button>
                                   <Button color={btn_color_f}>F</Button>
                                   <Button color={btn_color_rocof}>Ro</Button>
-                                  {/* color="secondary" */}
                                 </ButtonGroup>
                               </div>
                             </td>
 
                             <td>32.37111871</td>
-                            <td>1</td>
-                            {/* <td>
-                            <IconButton
-                              color="secondary"
-                              aria-label="upload picture"
-                              component="span"
-                            >
-                              <VisibilityIcon
-                                id={anomaly.id}
-                                onClick={() => this.loadCharts(anomaly.id)}
-                              />
-                            </IconButton>
-                          </td> */}
+                            <td>Missing Data</td>
                           </tr>
                         ))
                       ) : (
@@ -364,215 +388,68 @@ class Home extends Component {
                         flexDirection: "row",
                         padding: "5px",
                       }}
-                    >
-                      
-                    </div>
+                    ></div>
                   </Table>
 
                   <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={this.prevPage}
-                        aria-label="Back"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowBackIosRoundedIcon />
-                      </IconButton>
+                    color="primary"
+                    variant="contained"
+                    onClick={this.prevPage}
+                    aria-label="Back"
+                    style={{ padding: "5px" }}
+                  >
+                    <ArrowBackIosRoundedIcon />
+                  </IconButton>
 
-                      {this.state.posts.map((anomaly, id) => (
+                  {this.state.posts.map((anomaly, id) => (
+                    <IconButton
+                      color="primary"
+                      variant="contained"
+                      style={{ padding: "10px", height: "20px", width: "10px" }}
+                    >
+                      {this.state.page < 2 ? (
                         <IconButton
-                        color="primary"
-                        variant="contained"
-                        style={{ padding: "10px", height: "20px", width:"10px" }}
+                          color="primary"
+                          variant="contained"
+                          onClick={() => this.setPage(id)}
+                          style={{
+                            padding: "10px",
+                            height: "20px",
+                            width: "20px",
+                            fontSize: "10px",
+                          }}
                         >
-                          {this.state.page < 2 ? (
-                            <IconButton
-                              color="primary"
-                              variant="contained"
-                              onClick={() => this.setPage(id)}
-                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
-                              >
-                                {id + 1}
-                              </IconButton>
-                          ) : 
-                            <IconButton
-                              color="primary"
-                              variant="contained"
-                              onClick={() => this.setPage(this.state.page + id - 2)}
-                              aria-label="Back"
-                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
-                              >
-                                {this.state.page + id - 1}
-                              </IconButton>}
+                          {id + 1}
                         </IconButton>
-                      ))}
-
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        backgroundColor="primary"
-                        onClick={this.nextPage}
-                        aria-label="Next"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowForwardIosRoundedIcon />
-                      </IconButton>
-
-                </TableContainer>
-              </Paper>
-            </Grid>
-            <Grid style={{ marginLeft: "10px", marginTop: "8px" }} item xs={12}>
-              <Paper elevation={3}>
-                <TableContainer>
-                  <Table aria-label="customized table">
-                    <TableHead>
-                      <TableRow>
-                        <StyledTableCell align="center">DATE/TIME</StyledTableCell>
-                        {/* <StyledTableCell align="center"> PMU1 */}
-                          {/* <TableRow> */}
-                            <StyledTableCell align="center">PMU1 ID</StyledTableCell>
-                            <StyledTableCell align="center">BUS ID</StyledTableCell>
-                            <StyledTableCell align="center">NOR_SCORE</StyledTableCell>
-                          {/* </TableRow> */}
-                        {/* </StyledTableCell> */}
-                        {/* <StyledTableCell align="center"> PMU2 */}
-                          {/* <TableRow> */}
-                            <StyledTableCell align="center">PMU2 ID</StyledTableCell>
-                            <StyledTableCell align="center">BUS ID</StyledTableCell>
-                            <StyledTableCell align="center">NOR_SCORE</StyledTableCell>
-                          {/* </TableRow> */}
-                        {/* </StyledTableCell> */}
-                        {/* <StyledTableCell align="center">VIEW</StyledTableCell> */}
-                      </TableRow>
-                    </TableHead>
-                    <tbody>
-                      {this.state.loc.length > 0 ? (
-                        this.state.loc.map((pmu_loc) => (
-                          <tr id={pmu_loc.id}>
-                            <td>
-                              <div>
-                                <p style={{ margin: "0" }}>
-                                  {pmu_loc.event_date}
-                                </p>
-                                <p style={{ margin: "0" }}>
-                                  {pmu_loc.event_time}
-                                </p>
-                              </div>
-                            </td>
-                            {/* <td> */}
-                              <td align="center">{pmu_loc.pmu1_id}</td>
-                              <td align="center">
-                              {pmu_loc.pmu1_bus_id} 
-                              {/* &nbsp;  <Badge color="secondary" badgeContent=" " variant="dot"></Badge> */}
-                              </td>
-                              <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td>
-                            {/* </td> */}
-                            {/* <td> */}
-                              <td align="center">{pmu_loc.pmu2_id}</td>
-                              <td align="center">
-                              {pmu_loc.pmu2_bus_id}
-                              {/*  &nbsp;<Badge color="error" badgeContent=" " variant="dot"></Badge> */}
-                                </td>
-                              <td style={{ paddingLeft: "3rem" }} align="right "><b>{pmu_loc.pmu2_norm_score}</b></td>
-                            {/* </td> */}
-                            {/* <td>
-                              <IconButton
-                                color="secondary"
-                                aria-label="upload picture"
-                                component="span"
-                                style={{ padding: "5px" }}
-                              >
-                                <VisibilityIcon
-                                  id={pmu_loc.pmu1_bus_id}
-                                  onClick={() => this.mapNodeHighlight(pmu_loc.pmu1_bus_id, pmu_loc.pmu2_bus_id)}
-                                />
-                              </IconButton>
-                            </td> */}
-                            
-                          </tr>
-                        ))
                       ) : (
-                        <td>Loading...</td>
-                      )}
-                    </tbody>
-                    <div
-                      style={{
-                        float: "right",
-                        display: "flex",
-                        flexDirection: "row",
-                      }}
-                    >
-                    </div>
-                  </Table>
-                  <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={this.prevPageLoc}
-                        aria-label="Back"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowBackIosRoundedIcon />
-                      </IconButton>
-
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.setPageLoc(0)}
-                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
-                      >1</IconButton>
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.setPageLoc(1)}
-                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
-                      >2</IconButton>
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.setPageLoc(2)}
-                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
-                      >3</IconButton>
-
-                      {/* Hard coded the buttons because there were only 3 pages. Below is the code to loop through multiple pages*/}
-
-                      {/*{this.state.posts.map((anomaly, id) => (
                         <IconButton
-                        color="primary"
-                        variant="contained"
-                        style={{ padding: "10px", height: "20px", width:"10px" }}
+                          color="primary"
+                          variant="contained"
+                          onClick={() => this.setPage(this.state.page + id - 2)}
+                          aria-label="Back"
+                          style={{
+                            padding: "10px",
+                            height: "20px",
+                            width: "20px",
+                            fontSize: "10px",
+                          }}
                         >
-                          {this.state.locpage < 2 ? (
-                            <IconButton
-                              color="primary"
-                              variant="contained"
-                              onClick={() => this.setPageLoc(id)}
-                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
-                              >
-                                {id + 1}
-                              </IconButton>
-                          ) : 
-                            <IconButton
-                              color="primary"
-                              variant="contained"
-                              onClick={() => this.setPageLoc(this.state.locpage + id - 2)}
-                              aria-label="Back"
-                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
-                              >
-                                {this.state.locpage + id - 1}
-                              </IconButton>}
+                          {this.state.page + id - 1}
                         </IconButton>
-                          ))}*/}
+                      )}
+                    </IconButton>
+                  ))}
 
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        backgroundColor="primary"
-                        onClick={this.nextPageLoc}
-                        aria-label="Next"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowForwardIosRoundedIcon />
-                      </IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    backgroundColor="primary"
+                    onClick={this.nextPage}
+                    aria-label="Next"
+                    style={{ padding: "5px" }}
+                  >
+                    <ArrowForwardIosRoundedIcon />
+                  </IconButton>
                 </TableContainer>
               </Paper>
             </Grid>

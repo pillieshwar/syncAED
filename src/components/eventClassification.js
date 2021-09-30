@@ -28,6 +28,8 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Table from "@material-ui/core/Table";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
 let API_URL = "http://127.0.0.1:9002/result_pmu_localization/0";
 class EventClassification extends Component {
   constructor(props) {
@@ -46,11 +48,11 @@ class EventClassification extends Component {
     this.mapNodeHighlight = this.mapNodeHighlight.bind(this);
   }
 
-  mapNodeHighlight(busid){
-    console.log("mapbusid : ", this.state.map_busid)
-    this.setState({ map_busid: busid || "BUSID_09"});
-  };
-  
+  mapNodeHighlight(busid) {
+    console.log("mapbusid : ", this.state.map_busid);
+    this.setState({ map_busid: busid || "BUSID_09" });
+  }
+
   loadCharts(id) {
     console.log(id);
     let API_CHART_URL = "http://127.0.0.1:9002/result_events/chart_data/" + id;
@@ -60,7 +62,8 @@ class EventClassification extends Component {
 
   nextPage() {
     console.log("next " + this.state.page);
-    API_URL = "http://127.0.0.1:9002/result_pmu_localization/" + (this.state.page + 1);
+    API_URL =
+      "http://127.0.0.1:9002/result_pmu_localization/" + (this.state.page + 1);
     this.setState({ page: this.state.page + 1 });
     this.getData();
   }
@@ -77,7 +80,9 @@ class EventClassification extends Component {
   prevPage() {
     console.log("prev " + this.state.page);
     if (this.state.page >= 0) {
-      API_URL = "http://127.0.0.1:9002/result_pmu_localization/" + (this.state.page - 1);
+      API_URL =
+        "http://127.0.0.1:9002/result_pmu_localization/" +
+        (this.state.page - 1);
     }
     if (this.state.page > 0) {
       this.setState({ page: this.state.page - 1 });
@@ -86,7 +91,7 @@ class EventClassification extends Component {
   }
 
   setPage(id) {
-    API_URL = "http://127.0.0.1:9002/result_pmu_localization/" + (id);
+    API_URL = "http://127.0.0.1:9002/result_pmu_localization/" + id;
     this.setState({ page: id });
     this.getData();
   }
@@ -238,11 +243,9 @@ class EventClassification extends Component {
       width: 16,
     };
 
-
-
     return (
       <div class="row">
-        <Grid  container>
+        <Grid container>
           <Grid item xs={7}>
             <Grid style={styleObj} item xs={12}>
               <Paper elevation={3}>
@@ -251,7 +254,20 @@ class EventClassification extends Component {
                     <TableHead>
                       <TableRow>
                         <StyledTableCell>DATE/TIME</StyledTableCell>
-                        <StyledTableCell>PMU ID</StyledTableCell>
+                        <StyledTableCell>
+                          <Select
+                            color="white"
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            // value={age}
+                            label="PMU ID"
+                            // onChange={handleChange}
+                          >
+                            <MenuItem value={"GTNET_5"}>GTNET_3</MenuItem>
+                            <MenuItem value={"GTNET_5"}>GTNET_4</MenuItem>
+                            <MenuItem value={"GTNET_5"}>GTNET_5</MenuItem>
+                          </Select>
+                        </StyledTableCell>
                         <StyledTableCell align="center">BUS ID</StyledTableCell>
                         <StyledTableCell>EVENT TYPE</StyledTableCell>
                         <StyledTableCell>VIEW</StyledTableCell>
@@ -285,7 +301,9 @@ class EventClassification extends Component {
                               >
                                 <VisibilityIcon
                                   id={pmu_loc.pmu1_bus_id}
-                                  onClick={() => this.mapNodeHighlight(pmu_loc.pmu1_bus_id)}
+                                  onClick={() =>
+                                    this.mapNodeHighlight(pmu_loc.pmu1_bus_id)
+                                  }
                                 />
                               </IconButton>
                             </td>
@@ -301,35 +319,48 @@ class EventClassification extends Component {
                         display: "flex",
                         flexDirection: "row",
                       }}
-                    >
-                    </div>
+                    ></div>
                   </Table>
                   <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={this.prevPage}
-                        aria-label="Back"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowBackIosRoundedIcon />
-                      </IconButton>
+                    color="primary"
+                    variant="contained"
+                    onClick={this.prevPage}
+                    aria-label="Back"
+                    style={{ padding: "5px" }}
+                  >
+                    <ArrowBackIosRoundedIcon />
+                  </IconButton>
 
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.setPage(0)}
-                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
-                      >1</IconButton>
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.setPage(1)}
-                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
-                      >2</IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    onClick={() => this.setPage(0)}
+                    style={{
+                      padding: "5px",
+                      height: "20px",
+                      width: "20px",
+                      fontSize: "10px",
+                    }}
+                  >
+                    1
+                  </IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    onClick={() => this.setPage(1)}
+                    style={{
+                      padding: "5px",
+                      height: "20px",
+                      width: "20px",
+                      fontSize: "10px",
+                    }}
+                  >
+                    2
+                  </IconButton>
 
-                      {/* Hard coded the buttons because there were only 2 pages. Below is the code to loop through multiple pages*/}
+                  {/* Hard coded the buttons because there were only 2 pages. Below is the code to loop through multiple pages*/}
 
-                      {/*{this.state.posts.map((pmu_loc, id) => (
+                  {/*{this.state.posts.map((pmu_loc, id) => (
                         <IconButton
                         color="primary"
                         variant="contained"
@@ -357,26 +388,24 @@ class EventClassification extends Component {
                         </IconButton>
                           ))}*/}
 
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        backgroundColor="primary"
-                        onClick={this.nextPage}
-                        aria-label="Next"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowForwardIosRoundedIcon />
-                      </IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    backgroundColor="primary"
+                    onClick={this.nextPage}
+                    aria-label="Next"
+                    style={{ padding: "5px" }}
+                  >
+                    <ArrowForwardIosRoundedIcon />
+                  </IconButton>
                 </TableContainer>
               </Paper>
             </Grid>
-
-            
           </Grid>
           <Grid style={styleObjCharts} container xs={5}>
-          <Grid style={{ marginTop: "20px" }} item xs={12}>
+            <Grid style={{ marginTop: "20px" }} item xs={12}>
               {/* <Paper elevation={3}> */}
-                <Maps mapnodebusid={this.state.map_busid}/>
+              <Maps mapnodebusid={this.state.map_busid} />
               {/* </Paper> */}
             </Grid>
             {/* <Grid style={{ marginTop: "50px", marginLeft: "-25px" }} item xs={5}>

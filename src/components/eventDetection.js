@@ -48,11 +48,11 @@ class EventDetection extends Component {
     this.mapNodeHighlight = this.mapNodeHighlight.bind(this);
   }
 
-  mapNodeHighlight(busid1, busid2){
-    console.log("mapbusid : ", this.state.map_busid1)
-    this.setState({ map_busid1: busid1 || "BUSID_09"});
-    this.setState({ map_busid2: busid2 || "BUSID_10"});
-  };
+  mapNodeHighlight(busid1, busid2) {
+    console.log("mapbusid : ", this.state.map_busid1);
+    this.setState({ map_busid1: busid1 || "BUSID_09" });
+    this.setState({ map_busid2: busid2 || "BUSID_10" });
+  }
 
   loadCharts(id) {
     console.log(id);
@@ -80,7 +80,8 @@ class EventDetection extends Component {
   prevPage() {
     console.log("prev " + this.state.page);
     if (this.state.page >= 0) {
-      API_URL = "http://127.0.0.1:9002/pmu_localization/" + (this.state.page - 1);
+      API_URL =
+        "http://127.0.0.1:9002/pmu_localization/" + (this.state.page - 1);
     }
     if (this.state.page > 0) {
       this.setState({ page: this.state.page - 1 });
@@ -89,7 +90,7 @@ class EventDetection extends Component {
   }
 
   setPage(id) {
-    API_URL = "http://127.0.0.1:9002/pmu_localization/" + (id);
+    API_URL = "http://127.0.0.1:9002/pmu_localization/" + id;
     this.setState({ page: id });
     this.getData();
   }
@@ -210,6 +211,7 @@ class EventDetection extends Component {
         <Line
           type="monotone"
           dataKey="rocof"
+          label="asd"
           stroke="#926AA6"
           activeDot={{ r: 5 }}
           dot={false}
@@ -250,19 +252,37 @@ class EventDetection extends Component {
                   <Table aria-label="customized table">
                     <TableHead>
                       <TableRow>
-                        <StyledTableCell align="center">DATE/TIME</StyledTableCell>
-                        <StyledTableCell align="center"> PMU1
+                        <StyledTableCell align="center">
+                          DATE/TIME
+                        </StyledTableCell>
+                        <StyledTableCell align="center">
+                          {" "}
+                          PMU1
                           <TableRow>
-                            <StyledTableCell align="center">PMU ID</StyledTableCell>
-                            <StyledTableCell align="center">BUS ID</StyledTableCell>
-                            <StyledTableCell align="center">NORMALIZED SCORE</StyledTableCell>
+                            <StyledTableCell align="center">
+                              PMU ID
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                              BUS ID
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                              NORMALIZED SCORE
+                            </StyledTableCell>
                           </TableRow>
                         </StyledTableCell>
-                        <StyledTableCell align="center"> PMU2
+                        <StyledTableCell align="center">
+                          {" "}
+                          PMU2
                           <TableRow>
-                            <StyledTableCell align="center">PMU ID</StyledTableCell>
-                            <StyledTableCell align="center">BUS ID</StyledTableCell>
-                            <StyledTableCell align="center">NORMALIZED SCORE</StyledTableCell>
+                            <StyledTableCell align="center">
+                              PMU ID
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                              BUS ID
+                            </StyledTableCell>
+                            <StyledTableCell align="center">
+                              NORMALIZED SCORE
+                            </StyledTableCell>
                           </TableRow>
                         </StyledTableCell>
                         <StyledTableCell align="center">VIEW</StyledTableCell>
@@ -291,18 +311,28 @@ class EventDetection extends Component {
                             <td>
                               <td align="center">{pmu_loc.pmu1_id}</td>
                               <td align="center">
-                              {pmu_loc.pmu1_bus_id} &nbsp;  
-                              {/* <Badge color="secondary" badgeContent=" " variant="dot"></Badge> */}
+                                {pmu_loc.pmu1_bus_id} &nbsp;
+                                {/* <Badge color="secondary" badgeContent=" " variant="dot"></Badge> */}
                               </td>
-                              <td style={{ paddingLeft: "3rem" }} align="center"><b>{pmu_loc.pmu1_norm_score}</b></td>
+                              <td
+                                style={{ paddingLeft: "3rem" }}
+                                align="center"
+                              >
+                                <b>{pmu_loc.pmu1_norm_score}</b>
+                              </td>
                             </td>
                             <td>
                               <td align="center">{pmu_loc.pmu2_id}</td>
                               <td align="center">
-                              {pmu_loc.pmu2_bus_id} &nbsp; 
-                              {/* <Badge color="error" badgeContent=" " variant="dot"></Badge> */}
-                                </td>
-                              <td style={{ paddingLeft: "3rem" }} align="right "><b>{pmu_loc.pmu2_norm_score}</b></td>
+                                {pmu_loc.pmu2_bus_id} &nbsp;
+                                {/* <Badge color="error" badgeContent=" " variant="dot"></Badge> */}
+                              </td>
+                              <td
+                                style={{ paddingLeft: "3rem" }}
+                                align="right "
+                              >
+                                <b>{pmu_loc.pmu2_norm_score}</b>
+                              </td>
                             </td>
                             <td>
                               <IconButton
@@ -313,7 +343,12 @@ class EventDetection extends Component {
                               >
                                 <VisibilityIcon
                                   id={pmu_loc.pmu1_bus_id}
-                                  onClick={() => this.mapNodeHighlight(pmu_loc.pmu1_bus_id, pmu_loc.pmu2_bus_id)}
+                                  onClick={() =>
+                                    this.mapNodeHighlight(
+                                      pmu_loc.pmu1_bus_id,
+                                      pmu_loc.pmu2_bus_id
+                                    )
+                                  }
                                 />
                               </IconButton>
                             </td>
@@ -368,35 +403,48 @@ class EventDetection extends Component {
                         display: "flex",
                         flexDirection: "row",
                       }}
-                    >
-                    </div>
+                    ></div>
                   </Table>
                   <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={this.prevPage}
-                        aria-label="Back"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowBackIosRoundedIcon />
-                      </IconButton>
+                    color="primary"
+                    variant="contained"
+                    onClick={this.prevPage}
+                    aria-label="Back"
+                    style={{ padding: "5px" }}
+                  >
+                    <ArrowBackIosRoundedIcon />
+                  </IconButton>
 
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.setPage(0)}
-                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
-                      >1</IconButton>
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={() => this.setPage(1)}
-                        style={{ padding: "5px", height: "20px", width:"20px", fontSize:"10px" }}
-                      >2</IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    onClick={() => this.setPage(0)}
+                    style={{
+                      padding: "5px",
+                      height: "20px",
+                      width: "20px",
+                      fontSize: "10px",
+                    }}
+                  >
+                    1
+                  </IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    onClick={() => this.setPage(1)}
+                    style={{
+                      padding: "5px",
+                      height: "20px",
+                      width: "20px",
+                      fontSize: "10px",
+                    }}
+                  >
+                    2
+                  </IconButton>
 
-                      {/* Hard coded the buttons because there were only 2 pages. Below is the code to loop through multiple pages*/}
+                  {/* Hard coded the buttons because there were only 2 pages. Below is the code to loop through multiple pages*/}
 
-                      {/*{this.state.posts.map((pmu_loc, id) => (
+                  {/*{this.state.posts.map((pmu_loc, id) => (
                         <IconButton
                         color="primary"
                         variant="contained"
@@ -424,71 +472,111 @@ class EventDetection extends Component {
                         </IconButton>
                           ))}*/}
 
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        backgroundColor="primary"
-                        onClick={this.nextPage}
-                        aria-label="Next"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowForwardIosRoundedIcon />
-                      </IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    backgroundColor="primary"
+                    onClick={this.nextPage}
+                    aria-label="Next"
+                    style={{ padding: "5px" }}
+                  >
+                    <ArrowForwardIosRoundedIcon />
+                  </IconButton>
                 </TableContainer>
               </Paper>
             </Grid>
-
           </Grid>
-         
+
           <Grid style={styleObjCharts} container xs={4}>
-          <Grid style={{ marginTop: "0px", marginLeft:"0px" }} item xs={12}>
-          <Table style = {{height : "50px", width:"25%", padding:"10px", border:"1px"}}>
-            <tr > 
-              <td>PMU1</td>
-              <td>
-                <div style={{backgroundColor:"red", height : "50%", width:"100%", marginLeft:"25%", padding:"5px"}}></div>
-              </td>
-            </tr>
-            <tr>
-              <td>PMU2</td>
-              <td>
-                <div style={{backgroundColor:"orange", height : "50%", width:"100%", marginLeft:"25%", padding:"5px"}}></div>
-              </td>
-            </tr>
-            <tr>
-              <td>
-              </td>
-            </tr>
-          </Table>
+            <Grid style={{ marginTop: "0px", marginLeft: "0px" }} item xs={12}>
+              <Table
+                style={{
+                  height: "50px",
+                  width: "25%",
+                  padding: "10px",
+                  border: "1px",
+                }}
+              >
+                <tr>
+                  <td>PMU1</td>
+                  <td>
+                    <div
+                      style={{
+                        backgroundColor: "red",
+                        height: "50%",
+                        width: "100%",
+                        marginLeft: "25%",
+                        padding: "5px",
+                      }}
+                    ></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>PMU2</td>
+                  <td>
+                    <div
+                      style={{
+                        backgroundColor: "orange",
+                        height: "50%",
+                        width: "100%",
+                        marginLeft: "25%",
+                        padding: "5px",
+                      }}
+                    ></div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                </tr>
+              </Table>
               {/* <Paper elevation={3}> */}
-                <Maps 
-                  mapnodebusid1={this.state.map_busid1}
-                  mapnodebusid2={this.state.map_busid2}/>
+              <Maps
+                mapnodebusid1={this.state.map_busid1}
+                mapnodebusid2={this.state.map_busid2}
+              />
               {/* </Paper> */}
             </Grid>
-            <Grid style={{ marginTop: "50px", marginLeft: "-25px" }} item xs={5}>
+            {/* <Grid
+              style={{ marginTop: "50px", marginLeft: "-25px" }}
+              item
+              xs={5}
+            >
               {renderLineChart2}
             </Grid>
             <Grid item xs={2}></Grid>
-            <Grid style={{ marginTop: "50px", marginLeft: "-22px" }} item xs={5}>
+            <Grid
+              style={{ marginTop: "50px", marginLeft: "-22px" }}
+              item
+              xs={5}
+            >
               {renderLineChart4}
-            </Grid>
+            </Grid> */}
 
-            {/* <Grid style={styleObjCharts2} item xs={5}>
+            <Grid
+              style={styleObjCharts}
+              style={{ marginTop: "48px", marginLeft: "-12px" }}
+              item
+              xs={5}
+            >
               {renderLineChart3}
             </Grid>
             <Grid item xs={1}></Grid>
-            <Grid style={styleObjCharts2} item xs={5}>
+            {/* <Grid style={styleObjCharts2} item xs={5}>
               {renderLineChart4}
             </Grid> */}
 
             {/* <Grid style={styleObjCharts2} item xs={5}>
               {renderLineChart5}
-            </Grid>
-            <Grid item xs={1}></Grid>
-            <Grid style={styleObjCharts2} item xs={5}>
-              {renderLineChart6}
             </Grid> */}
+            <Grid item xs={1}></Grid>
+            <Grid
+              style={styleObjCharts2}
+              style={{ marginTop: "48px" }}
+              item
+              xs={5}
+            >
+              {renderLineChart6}
+            </Grid>
           </Grid>
         </Grid>
       </div>

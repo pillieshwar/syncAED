@@ -59,7 +59,7 @@ class AnomalyDetection extends Component {
   }
 
   setPage(id) {
-    API_URL = "http://127.0.0.1:9002/main_result_events/" + (id);
+    API_URL = "http://127.0.0.1:9002/main_result_events/" + id;
     this.setState({ page: id });
     this.getData();
   }
@@ -230,14 +230,13 @@ class AnomalyDetection extends Component {
       height: 28,
       width: 16,
     };
-    var btn_color_va = "primary"
-    var btn_color_ca = "primary"
-    var btn_color_vm = "primary"
-    var btn_color_cm = "primary"
-    var btn_color_f = "primary"
-    var btn_color_rocof = "primary"
+    var btn_color_va = "primary";
+    var btn_color_ca = "primary";
+    var btn_color_vm = "primary";
+    var btn_color_cm = "primary";
+    var btn_color_f = "primary";
+    var btn_color_rocof = "primary";
     return (
-      
       <div class="row">
         <Grid style={styleObj} container>
           <Grid item xs={7}>
@@ -247,14 +246,17 @@ class AnomalyDetection extends Component {
                   <Table aria-label="customized table">
                     <TableHead>
                       <TableRow>
-                        <StyledTableCell>TIME</StyledTableCell>
+                        <StyledTableCell>END-TIME</StyledTableCell>
                         <StyledTableCell>PMU ID</StyledTableCell>
                         <StyledTableCell>BUS ID</StyledTableCell>
                         <StyledTableCell align="center">
                           ANOMALY DETECTED
                         </StyledTableCell>
-                        <StyledTableCell>CONFIDENTIAL LEVEL</StyledTableCell>
-                        <StyledTableCell>DETECTOR</StyledTableCell>
+                        <StyledTableCell>CONFIDENCE</StyledTableCell>
+                        {/* <StyledTableCell>DETECTOR</StyledTableCell> */}
+                        <StyledTableCell>
+                          ANOMALY CLASSIFICATION
+                        </StyledTableCell>
                         <StyledTableCell>VIEW</StyledTableCell>
                       </TableRow>
                     </TableHead>
@@ -290,108 +292,137 @@ class AnomalyDetection extends Component {
                                   aria-label="outlined primary button group"
                                 >
                                   {(() => {
-                                    const tt = anomaly.event_time
-                                    if(tt.substring(0, 5) === '00:47'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '17:35' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '16:48' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '18:23' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '15:11' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '01:35' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '02:24' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '15:59' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '19:12' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '19:59' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '20:47' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '21:36' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '22:23:' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '23:11' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '00:00' && anomaly.pmu_id==='PMU_03'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_cm = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else if(tt.substring(0, 5) === '03:59' && anomaly.pmu_id==='PMU_01'){
-                                      btn_color_va = "secondary"
-                                      btn_color_ca = "secondary"
-                                      btn_color_rocof = "secondary"
-                                    }
-                                    else {
-                                    btn_color_va = "primary"
-                                    btn_color_ca = "primary"
-                                    btn_color_rocof = "primary"
-                                    btn_color_vm = "primary"
-                                    btn_color_cm = "primary"
-                                    btn_color_f = "primary"
+                                    const tt = anomaly.event_time;
+                                    if (tt.substring(0, 5) === "00:47") {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "17:35" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "16:48" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "18:23" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "15:11" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "01:35" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "02:24" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "15:59" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "19:12" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "19:59" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "20:47" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "21:36" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "22:23:" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "23:11" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "00:00" &&
+                                      anomaly.pmu_id === "PMU_03"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_cm = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else if (
+                                      tt.substring(0, 5) === "03:59" &&
+                                      anomaly.pmu_id === "PMU_01"
+                                    ) {
+                                      btn_color_va = "secondary";
+                                      btn_color_ca = "secondary";
+                                      btn_color_rocof = "secondary";
+                                    } else {
+                                      btn_color_va = "primary";
+                                      btn_color_ca = "primary";
+                                      btn_color_rocof = "primary";
+                                      btn_color_vm = "primary";
+                                      btn_color_cm = "primary";
+                                      btn_color_f = "primary";
                                     }
                                   })()}
 
@@ -407,7 +438,8 @@ class AnomalyDetection extends Component {
                             </td>
                             {/*<td>{anomaly.vol_mag}</td>*/}
                             <td>32.37111871</td>
-                            <td>1</td>
+                            {/* <td>1</td> */}
+                            <td>Missing Data</td>
                             <td>
                               <IconButton
                                 color="secondary"
@@ -433,59 +465,69 @@ class AnomalyDetection extends Component {
                         display: "flex",
                         flexDirection: "row",
                       }}
-                    >
-                    </div>
+                    ></div>
                   </Table>
                   <IconButton
-                        color="primary"
-                        variant="contained"
-                        onClick={this.prevPage}
-                        aria-label="Back"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowBackIosRoundedIcon />
-                      </IconButton>
+                    color="primary"
+                    variant="contained"
+                    onClick={this.prevPage}
+                    aria-label="Back"
+                    style={{ padding: "5px" }}
+                  >
+                    <ArrowBackIosRoundedIcon />
+                  </IconButton>
 
-                      {this.state.posts.map((anomaly, id) => (
+                  {this.state.posts.map((anomaly, id) => (
+                    <IconButton
+                      color="primary"
+                      variant="contained"
+                      aria-label="Back"
+                      style={{ padding: "10px", height: "20px", width: "20px" }}
+                    >
+                      {this.state.page < 2 ? (
                         <IconButton
-                        color="primary"
-                        variant="contained"
-                        aria-label="Back"
-                        style={{ padding: "10px", height: "20px", width:"20px" }}
+                          color="primary"
+                          variant="contained"
+                          onClick={() => this.setPage(id)}
+                          aria-label="Back"
+                          style={{
+                            padding: "10px",
+                            height: "20px",
+                            width: "20px",
+                            fontSize: "10px",
+                          }}
                         >
-                          {this.state.page < 2 ? (
-                            <IconButton
-                              color="primary"
-                              variant="contained"
-                              onClick={() => this.setPage(id)}
-                              aria-label="Back"
-                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
-                              >
-                                {id + 1}
-                              </IconButton>
-                          ) : 
-                            <IconButton
-                              color="primary"
-                              variant="contained"
-                              onClick={() => this.setPage(this.state.page + id - 2)}
-                              aria-label="Back"
-                              style={{ padding: "10px", height: "20px", width:"20px", fontSize:"10px" }}
-                              >
-                                {this.state.page + id - 1}
-                              </IconButton>}
+                          {id + 1}
                         </IconButton>
-                      ))}
+                      ) : (
+                        <IconButton
+                          color="primary"
+                          variant="contained"
+                          onClick={() => this.setPage(this.state.page + id - 2)}
+                          aria-label="Back"
+                          style={{
+                            padding: "10px",
+                            height: "20px",
+                            width: "20px",
+                            fontSize: "10px",
+                          }}
+                        >
+                          {this.state.page + id - 1}
+                        </IconButton>
+                      )}
+                    </IconButton>
+                  ))}
 
-                      <IconButton
-                        color="primary"
-                        variant="contained"
-                        backgroundColor="primary"
-                        onClick={this.nextPage}
-                        aria-label="Next"
-                        style={{ padding: "5px" }}
-                      >
-                        <ArrowForwardIosRoundedIcon />
-                      </IconButton>
+                  <IconButton
+                    color="primary"
+                    variant="contained"
+                    backgroundColor="primary"
+                    onClick={this.nextPage}
+                    aria-label="Next"
+                    style={{ padding: "5px" }}
+                  >
+                    <ArrowForwardIosRoundedIcon />
+                  </IconButton>
                 </TableContainer>
               </Paper>
             </Grid>
